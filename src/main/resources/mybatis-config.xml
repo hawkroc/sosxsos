@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!--配置全局属性-->
+    <settings>
+        <!--使用jdbc的getGeneratekeys获取自增主键值-->
+        <setting name="useGeneratedKeys" value="true"/>
+        <!--使用列别名替换别名　　默认true-->
+        <setting name="useColumnLabel" value="true"/>
+        <!--开启驼峰命名转换Table:create_time到 Entity(createTime)-->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+    </settings>
+    
+    
+    
+	<typeAliases>
+		<typeAlias type="com.sosxsos.ssm.entity.system.User" alias="User"/>
+		<typeAlias type="com.sosxsos.ssm.entity.system.Role" alias="Role"/>
+		<typeAlias type="com.sosxsos.ssm.entity.system.Menu" alias="Menu"/>
+		<typeAlias type="com.fh.util.PageData" alias="pd"/>
+		<!-- 分页 -->
+		<typeAlias type="com.sosxsos.ssm.entity.Page" alias="Page"/>
+		
+		<!-- webapp model -->
+		
+		<typeAlias type="com.sosxsos.ssm.entity.SignUpEntity" alias="SignUp"/>
+		<typeAlias type="com.sosxsos.ssm.entity.LoginEntity" alias="Login"/>
+		<typeAlias type="com.fh.controller.app.response.LoginResponse" alias="LoginRes"/>
+		
+		<typeAlias type="com.sosxsos.ssm.entity.LocationRangeEntity" alias="locatRan"/>
+		
+		
+		<typeAlias type="com.sosxsos.ssm.entity.LocationEntity" alias="location"/>
+		
+		
+		<typeAlias type="com.fh.controller.app.response.Resident" alias="resident"/>
+			
+				<typeAlias type="com.sosxsos.ssm.entity.ProductEntity" alias="product"/>
+				
+					<typeAlias type="com.sosxsos.ssm.entity.BananaEntity" alias="banana"/>
+		
+					<typeAlias type="com.sosxsos.ssm.entity.TransactionsBeans" alias="TransactionsBeans"/>	
+		
+	</typeAliases>
+    
+    
+    
+    
+    
+</configuration>

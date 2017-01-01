@@ -1,0 +1,23 @@
+<beans xmlns="http://www.springframework.org/schema/beans"  
+    xmlns:context="http://www.springframework.org/schema/context"  
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"    
+    xmlns:cache="http://www.springframework.org/schema/cache"    
+    xmlns:p="http://www.springframework.org/schema/p"    
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd    
+    http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd">    
+    <!--配置spring自动拦截带cache注解的注解方法-->  
+    <cache:annotation-driven />  
+    <!--配置cache管理工厂-->  
+    <bean id="cacheManagerFactory" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean" p:configLocation="classpath:ehcache.xml" p:shared="false"/>  
+    <bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager" p:cacheManager-ref="cacheManagerFactory"/>  
+    <!-- generic cache manager  
+        使用spring自带的多线程map集合,如果不适用ecache等缓存软件的,可以适用这个  
+    <bean id="cacheManager" class="org.springframework.cache.support.SimpleCacheManager">    
+        <property name="caches">    
+            <set>  
+                <bean class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean" p:name="user_Cache"/>    
+             </set>    
+        </property>    
+    </bean>  
+     -->  
+</beans>    

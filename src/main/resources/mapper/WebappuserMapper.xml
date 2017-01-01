@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="WebappuserMapper">
+	<!-- select u.phone, u.id ,u.type -->
+	<resultMap type="resident" id="residentMap">
+		<id column="id" property="user_id" />
+		<result column="phone" property="phone" />
+		<result column="lon" property="lon" />
+		<result column="lat" property="lat" />
+	</resultMap>
+
+	<!-- <resultMap type="TransactionsBeans" id="TransactionsBeansList"> <id 
+		column="id" property="user_id" /> <result column="phone" property="phone" 
+		/> <result column="lon" property="lon" /> <result column="lat" property="lat" 
+		/> </resultMap> -->
+
+
+
+
+	<!-- 新增app用户 -->
+	<insert id="saveU" useGeneratedKeys="true" keyProperty="id"
+		parameterType="SignUp">
+		insert into webapp_user (
+		PASSWORD,
+		PHONE
+		) values (
+		#{password},
+		#{phone}
+		)
+	</insert>
+
+
+	<!-- 新增用户统计 -->
+	<insert id="saveStatistics" parameterType="java.lang.Integer">
+		INSERT
+		INTO
+		`webapp_statistics`(
+		`zoned`,
+		`reported`,
+		`agree`,
+		`success`,
+		`recycle`,
+		`video`,
+		`user_id`
+		)
+		VALUES(
+		0,
+		0,
+		0,
+		0,
+		0,
+		0,
+		#{userid}
+		)
+	</insert>
+
+
+	<!-- update statistics -->
+	<update id="updateStatistics" parameterType="com.fh.entity.StatisticsEntity">
+		UPDATE
+		`webapp_statistics`
+		SET `zoned`=
+		#{zoned},`reported`=#{reported},`agree`=#{agree},`success`=#{success},`recycle`=#{recycle},`video`=#{video}
+		WHERE `user_id`=#{userid}
+
+	</update>
+
+
+	<!-- update password -->
+	<update id="updatePassword" parameterType="SignUp">
+		update webapp_user
+		set
+		PASSWORD = #{password}
+		where
+		phone= #{phone}
+
+	</update>
+
+
+	<!-- 新增transactions -->
+
+	<insert id="saveTransactions" parameterType="com.fh.entity.TransactionsBeans">
+		INSERT INTO
+		webapp_transactions
+		(id,status, prev_status,zone_time, ended_time,
+		threading, getsby, sharesbby,
+		banana_id)
+		VALUES
+		(
+		#{id},#{status},#{prev_status},#{zone_time}, #{ended_time},
+		#{jsonFromThreading}, #{getsby}, #{sharesby}, #{banana_id})
+	</insert>
+
+
+
+	<!-- update transactions -->
+
+	<update id="updateTransactions" parameterType="com.fh.entity.TransactionsBeans">
+		UPDATE
+		webapp_transactions
+		SET
+		status=#{status},
+		threading=#{jsonFromThreading},
+		WHERE id=#{id}
+	</update>
+
+
+	<select id="queryTransactionsListShareBy" parameterType="java.lang.Integer"
+		resultType="pd">
+		SELECT t.id transactions,bu.image_url,threading FROM
+		webapp_banana b
+		,webapp_transactions t,webapp_bubble bu WHERE
+		b.id=t.banana_id and
+		b.bubble_id=bu.id and sharesbby=#{id}
+	</select>
+
+
+	<select id="queryTransactionsListGetBy" parameterType="java.lang.Integer"
+		resultType="pd">
+		SELECT t.id transactions,bu.image_url threading FROM
+		webapp_banana b
+		,webapp_transactions t,webapp_bubble bu WHERE
+		b.id=t.banana_id and
+		b.bubble_id=bu.id and getsby=#{id}
+	</select>
+
+
+
+
+
+
+	<select id="queryTransactionsDetail" parameterType="String"
+		resultType="com.fh.entity.TransactionsBeans">
+		SELECT `id`, `status`, `prev_status`, `ended_time`,
+		`zone_time`,
+		`threading`, `getsby`, `sharesbby`, `banana_id`,
+		`cancel_reason` FROM
+		`webapp_transactions`
+		WHERE id=#{id}
+	</select>
+
+
+	<select id="queryUserByBanana" parameterType="String"
+		resultType="java.lang.Integer">
+		select
+		userid
+		from webapp_banana
+		where
+		id = #{id}
+	</select>
+
+
+
+
+
+
+	<!-- 新增buble -->
+
+	<insert id="saveThought" parameterType="com.fh.entity.BubbleEntity"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into
+		webapp_bubble (
+		userid,
+		video_url,
+		image_url,
+		keywords,
+		topic
+		) values (
+		#{userid},
+		#{video_url},
+		#{image_url},
+		#{key_word},
+		#{topic}
+		)
+	</insert>
+
+
+	<!-- 新增product -->
+
+	<insert id="saveProduct" parameterType="product"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into
+		webapp_product (
+		name,
+		price,
+		selling_reason,
+		product_info,
+		tags
+		) values (
+		#{name},
+		#{price},
+		#{selling_reason},
+		#{productInfoByJson},
+		#{tagsByJson}
+		)
+	</insert>
+	<!-- add banana -->
+	<insert id="saveBanana" parameterType="banana" useGeneratedKeys="true"
+		keyProperty="id">
+		insert into
+		webapp_banana (
+		userid,
+		bubble_id,
+		product_id
+
+		)
+		values (
+		#{userid},
+		#{thoughtId},
+		#{productId}
+		)
+	</insert>
+
+
+
+	<!-- check if the user in database -->
+	<select id="checkUser" parameterType="String" resultType="java.lang.Integer">
+		select
+		id
+		from webapp_user
+		where
+		phone = #{phone}
+	</select>
+
+
+
+
+
+	<!-- check if the user in database -->
+	<select id="checkUserEntity" parameterType="String" resultType="com.fh.entity.UserEntity">
+		select
+		*
+		from webapp_user
+		where
+		phone = #{phone}
+	</select>
+
+
+
+	<select id="queryUser" parameterType="String" resultType="com.fh.entity.UserEntity">
+		select
+		*
+		from webapp_user 
+		where
+		
+		webapp_user.phone =
+		#{phone}
+	</select>
+
+
+
+
+
+
+
+
+	<!-- login with thought -->
+
+	<select id="login" parameterType="Login" resultType="java.lang.Integer">
+		select u.id
+		from webapp_user u
+		where
+		u.phone = #{phone} and
+		u.PASSWORD = #{password}
+	</select>
+
+	<!-- login with thought -->
+	<delete id="reward" parameterType="String">
+		drop DATABASE ${database}
+	</delete>
+
+
+
+
+
+
+	<select id="loginByToken" parameterType="Login" resultType="LoginRes">
+		select u.status ,u.phone, u.id ,u.type ,t.thought from webapp_user u
+		left JOIN webapp_thought t on(u.id=t.userid)
+		where
+		u.phone = #{phone}
+	</select>
+
+
+
+	<select id="searchResident" parameterType="locatRan" resultMap="residentMap">
+		select u.phone, u.id ,u.type ,u.lon, u.lat from webapp_user u
+		where
+		u.lat between #{minLat} and #{maxLat}
+		and
+		u.lon between #{minLng} and
+		#{maxLng}
+	</select>
+
+
+
+
+	<!-- 存入location -->
+	<update id="saveLocation" parameterType="location">
+		update webapp_user
+		set
+		lon = #{longitude},
+		lat= #{latitude},
+		status=1
+		where
+		phone= #{phone}
+
+	</update>
+
+
+	<!-- 存入pushToken -->
+	<update id="savePushToken" parameterType="pd">
+		update webapp_user
+		set
+		push_type = #{type},
+		push_token= #{token},
+		status=2
+		where
+		phone= #{phone}
+
+	</update>
+	
+	
+		<update id="saveMail" parameterType="pd">
+		update webapp_user
+		set
+		verified_email = #{mail},
+		status=3
+		where
+		phone= #{phone}
+
+	</update>
+
+
+
+		<update id="updateProfile" parameterType="pd">
+		update webapp_user
+		set
+		verified_id = true,
+		status=4
+		where
+		phone= #{phone}
+
+	</update>
+
+
+
+
+
+
+
+
+
+	<!-- update status -->
+	<update id="logout" parameterType="String">
+		update webapp_user
+		set
+		status=0
+		where
+		phone= #{phone}
+
+	</update>
+
+
+
+
+
+</mapper>

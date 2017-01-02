@@ -14,7 +14,7 @@
     <context:property-placeholder location="classpath:jdbc.properties" ignore-unresolvable="true"/>
 
     <!--2.数据源druid -->
-	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" 
+	<bean id="dataSource1" class="com.alibaba.druid.pool.DruidDataSource" 
 			init-method="init" destroy-method="close">
 		<property name="driverClassName" value="${jdbc.driverClassName}" />
 		<property name="url" value="${jdbc.url}" />
@@ -30,6 +30,26 @@
 	    <property name="filters" value="wall,stat" /> 
 	</bean>
     
+    <bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
+    <property name="poolName" value="springHikariCP" />
+    <property name="connectionTestQuery" value="SELECT 1" />
+    <property name="dataSourceClassName"       value="com.mysql.jdbc.jdbc2.optional.MysqlDataSource" />
+    <property name="dataSourceProperties">
+        <props>
+            <prop key="url">${jdbc.url}</prop>
+            <prop key="user">${jdbc.username}</prop>
+            <prop key="password">${jdbc.password}</prop>
+            
+            <prop key="cachePrepStmts">${cachePrepStmts}</prop>
+            <prop key="prepStmtCacheSize">${prepStmtCacheSize}</prop>
+            <prop key="prepStmtCacheSqlLimit">${prepStmtCacheSqlLimit}</prop>
+        </props>
+    </property>
+</bean>
+
+<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
+    <constructor-arg ref="hikariConfig" />
+</bean>
 
     <!--3、配置SqlSessionFactory对象-->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
@@ -50,5 +70,24 @@
         <!-- 给出需要扫描的Dao接口-->
         <property name="basePackage" value="com.sosxsos.ssm.dao"/>
     </bean>
+
+
+
+  <!-- 异步线程池 -->  
+  <bean id="threadsPool" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">  
+    <!-- 核心线程数  -->  
+    <property name="corePoolSize" value="3" />  
+    <!-- 最大线程数 -->  
+    <property name="maxPoolSize" value="10" />  
+    <!-- 队列最大长度 >=mainExecutor.maxSize -->  
+    <property name="queueCapacity" value="1000" />  
+    <!-- 线程池维护线程所允许的空闲时间 -->  
+    <property name="keepAliveSeconds" value="300" />  
+    <!-- 线程池对拒绝任务(无线程可用)的处理策略 -->  
+    <property name="rejectedExecutionHandler">  
+      <bean class="java.util.concurrent.ThreadPoolExecutor$CallerRunsPolicy" />  
+    </property>  
+  </bean>  
+  
 
 </beans>

@@ -15,9 +15,10 @@ public class DaoSupport implements DAO {
 
 	@Resource(name = "sqlSessionTemplate")
 	private SqlSessionTemplate sqlSessionTemplate;
-	
+
 	/**
 	 * 保存对象
+	 * 
 	 * @param str
 	 * @param obj
 	 * @return
@@ -26,20 +27,70 @@ public class DaoSupport implements DAO {
 	public Object save(String str, Object obj) throws Exception {
 		return sqlSessionTemplate.insert(str, obj);
 	}
-	
+
 	/**
 	 * 批量更新
+	 * 
 	 * @param str
 	 * @param obj
 	 * @return
 	 * @throws Exception
 	 */
-	public Object batchSave(String str, List<Object> objs )throws Exception{
-		return sqlSessionTemplate.insert(str, objs);
+	public Object batchSave(String str, List<Object> objs) throws Exception {
+
+		// return sqlSessionTemplate.insert(str, objs);
+		return this.batchOperat(str, objs, "insert");
 	}
-	
+
+	/**
+	 * 
+	 * @param str
+	 * @param objs
+	 * @param type
+	 * @return
+	 * @throws Exception
+	 */
+	private Object batchOperat(String str, List<Object> objs, String type) throws Exception {
+		SqlSessionFactory sqlSessionFactory = sqlSessionTemplate.getSqlSessionFactory();
+		// 批量执行器
+		SqlSession sqlSession = sqlSessionFactory.openSession(ExecutorType.BATCH, false);
+		int n = 0;
+		try {
+			if (objs != null) {
+
+				if (type.equalsIgnoreCase("update")) {
+					for (Object object : objs) {
+						sqlSession.update(str, object);
+						n++;
+					}
+				}
+				if (type.equalsIgnoreCase("insert")) {
+					for (Object object : objs) {
+						sqlSession.insert(str, object);
+						n++;
+					}
+				}
+				if (type.equalsIgnoreCase("delete")) {
+					for (Object object : objs) {
+						sqlSession.delete(str, object);
+						n++;
+					}
+				}
+
+				sqlSession.flushStatements();
+				sqlSession.commit();
+				sqlSession.clearCache();
+			}
+		} finally {
+			sqlSession.close();
+		}
+
+		return n;
+	}
+
 	/**
 	 * 修改对象
+	 * 
 	 * @param str
 	 * @param obj
 	 * @return
@@ -51,42 +102,50 @@ public class DaoSupport implements DAO {
 
 	/**
 	 * 批量更新
+	 * 
 	 * @param str
 	 * @param obj
 	 * @return
 	 * @throws Exception
 	 */
-	public void batchUpdate(String str, List<Object> objs )throws Exception{
-		SqlSessionFactory sqlSessionFactory = sqlSessionTemplate.getSqlSessionFactory();
-		//批量执行器
-		SqlSession sqlSession = sqlSessionFactory.openSession(ExecutorType.BATCH,false);
-		try{
-			if(objs!=null){
-				for(int i=0,size=objs.size();i<size;i++){
-					sqlSession.update(str, objs.get(i));
-				}
-				sqlSession.flushStatements();
-				sqlSession.commit();
-				sqlSession.clearCache();
-			}
-		}finally{
-			sqlSession.close();
-		}
+	public void batchUpdate(String str, List<Object> objs) throws Exception {
+		// SqlSessionFactory sqlSessionFactory =
+		// sqlSessionTemplate.getSqlSessionFactory();
+		// //批量执行器
+		// SqlSession sqlSession =
+		// sqlSessionFactory.openSession(ExecutorType.BATCH,false);
+		// try{
+		// if(objs!=null){
+		// for(int i=0,size=objs.size();i<size;i++){
+		// sqlSession.update(str, objs.get(i));
+		// }
+		// sqlSession.flushStatements();
+		// sqlSession.commit();
+		// sqlSession.clearCache();
+		// }
+		// }finally{
+		// sqlSession.close();
+		// }
+
+		this.batchOperat(str, objs, "update");
 	}
-	
+
 	/**
-	 * 批量更新
+	 * 批量删除
+	 * 
 	 * @param str
 	 * @param obj
 	 * @return
 	 * @throws Exception
 	 */
-	public Object batchDelete(String str, List<Object> objs )throws Exception{
-		return sqlSessionTemplate.delete(str, objs);
+	public Object batchDelete(String str, List<Object> objs) throws Exception {
+		// return sqlSessionTemplate.delete(str, objs);
+		return this.batchOperat(str, objs, "delete");
 	}
-	
+
 	/**
-	 * 删除对象 
+	 * 删除对象
+	 * 
 	 * @param str
 	 * @param obj
 	 * @return
@@ -95,9 +154,10 @@ public class DaoSupport implements DAO {
 	public Object delete(String str, Object obj) throws Exception {
 		return sqlSessionTemplate.delete(str, obj);
 	}
-	 
+
 	/**
 	 * 查找对象
+	 * 
 	 * @param str
 	 * @param obj
 	 * @return
@@ -109,6 +169,7 @@ public class DaoSupport implements DAO {
 
 	/**
 	 * 查找对象
+	 * 
 	 * @param str
 	 * @param obj
 	 * @return
@@ -117,11 +178,9 @@ public class DaoSupport implements DAO {
 	public Object findForList(String str, Object obj) throws Exception {
 		return sqlSessionTemplate.selectList(str, obj);
 	}
-	
+
 	public Object findForMap(String str, Object obj, String key, String value) throws Exception {
 		return sqlSessionTemplate.selectMap(str, obj, key);
 	}
-	
+
 }
-
-

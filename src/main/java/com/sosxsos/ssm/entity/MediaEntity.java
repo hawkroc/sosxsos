@@ -1,6 +1,10 @@
 package com.sosxsos.ssm.entity;
 
 public class MediaEntity   extends BaseEntity {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	public String getVideo_url() {
 		return video_url;
 	}

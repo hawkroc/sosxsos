@@ -2,7 +2,7 @@ package com.sosxsos.ssm.entity;
 
 import com.sosxsos.ssm.util.JacksonUtil;
 
-public class TransactionsBeans {
+public class TransactionsEntity {
 	// {
 	// "status": 0,
 	// "prev_status": 0,

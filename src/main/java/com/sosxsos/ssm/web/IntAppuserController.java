@@ -34,11 +34,10 @@ import com.sosxsos.ssm.dto.TheardingRes;
 import com.sosxsos.ssm.dto.request.CommonRequst;
 import com.sosxsos.ssm.entity.BananaEntity;
 import com.sosxsos.ssm.entity.LocationRangeEntity;
-import com.sosxsos.ssm.entity.LoginEntity;
+//import com.sosxsos.ssm.entity.LoginEntity;
 import com.sosxsos.ssm.entity.PushBean;
-import com.sosxsos.ssm.entity.SignUpEntity;
 import com.sosxsos.ssm.entity.Threading;
-import com.sosxsos.ssm.entity.TransactionsBeans;
+import com.sosxsos.ssm.entity.TransactionsEntity;
 import com.sosxsos.ssm.entity.UserEntity;
 import com.sosxsos.ssm.util.CacheUtil;
 import com.sosxsos.ssm.util.Const;
@@ -105,7 +104,7 @@ public class IntAppuserController extends BaseController {
 	@RequestMapping(value = "/login", method = RequestMethod.POST, produces = { "application/json;charset=UTF-8" })
 	@ResponseBody
 
-	public Object login(@RequestBody LoginEntity p, HttpServletResponse response) {
+	public Object login(@RequestBody CommonRequst p, HttpServletResponse response) {
 
 		LoginRes t = null;
 
@@ -172,7 +171,7 @@ public class IntAppuserController extends BaseController {
 	@RequestMapping(value = { "/verification_code" }, method = RequestMethod.POST, produces = {
 			"application/json;charset=UTF-8" })
 	@ResponseBody
-	public Object verifyCodeByPhone(@RequestBody SignUpEntity p, HttpServletResponse response) {
+	public Object verifyCodeByPhone(@RequestBody CommonRequst p, HttpServletResponse response) {
 
 		LoginRes rs = null;
 		HttpSession s = this.getRequest().getSession();
@@ -250,7 +249,7 @@ public class IntAppuserController extends BaseController {
 	@RequestMapping(value = { "/sign_up" }, method = RequestMethod.POST, produces = {
 			"application/json;charset=UTF-8" })
 	@ResponseBody
-	public Object signUp(@RequestBody SignUpEntity p, HttpServletResponse response) {
+	public Object signUp(@RequestBody CommonRequst p, HttpServletResponse response) {
 
 		LoginRes rs = new LoginRes();
 		HttpSession s = this.getRequest().getSession();
@@ -306,7 +305,7 @@ public class IntAppuserController extends BaseController {
 	 */
 	@RequestMapping(value = { "/forgot" }, method = RequestMethod.POST, produces = { "application/json;charset=UTF-8" })
 	@ResponseBody
-	public Object forgotPassWord(@RequestBody SignUpEntity p, HttpServletResponse response) {
+	public Object forgotPassWord(@RequestBody CommonRequst p, HttpServletResponse response) {
 
 		LoginRes rs = new LoginRes();
 	//	String token = this.getToken();
@@ -772,7 +771,7 @@ public class IntAppuserController extends BaseController {
 		UserEntity getby = getUserFromCache(token);
 
 		UserEntity shareby = null;
-		TransactionsBeans t = null;
+		TransactionsEntity t = null;
 
 		if (getby == null) {
 			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
@@ -850,7 +849,7 @@ public class IntAppuserController extends BaseController {
 			return rs;
 		}
 
-		TransactionsBeans transactionsBeans = null;
+		TransactionsEntity transactionsBeans = null;
 		try {
 			transactionsBeans = cacheService.getTransactionFromCache(id, "Transactions");
 			if (transactionsBeans == null) {
@@ -921,7 +920,7 @@ public class IntAppuserController extends BaseController {
 			return rs;
 		}
 
-		TransactionsBeans transactionsBeans = null;
+		TransactionsEntity transactionsBeans = null;
 		try {
 			transactionsBeans = cacheService.getTransactionFromCache(id, "TransactionsLong");
 
@@ -1013,7 +1012,7 @@ public class IntAppuserController extends BaseController {
 			return rs;
 		}
 
-		TransactionsBeans transactionsBeans = null;
+		TransactionsEntity transactionsBeans = null;
 		try {
 			transactionsBeans = cacheService.getTransactionFromCache(id, "TransactionsLong");
 
@@ -1097,7 +1096,7 @@ public class IntAppuserController extends BaseController {
 			return rs;
 		}
 
-		TransactionsBeans transactionsBeans = null;
+		TransactionsEntity transactionsBeans = null;
 		try {
 			transactionsBeans = cacheService.getTransactionFromCache(id, "TransactionsLong");
 
@@ -1180,12 +1179,12 @@ public class IntAppuserController extends BaseController {
 	@RequestMapping(value = { "/transactions/{id}" }, method = RequestMethod.GET)
 	@ResponseBody
 
-	public TransactionsBeans queryTransactionDetail(@PathVariable String id, HttpServletResponse response) {
+	public TransactionsEntity queryTransactionDetail(@PathVariable String id, HttpServletResponse response) {
 		// System.out.println("this dsfsdf is " + id);
-		TransactionsBeans rs = null;
+		TransactionsEntity rs = null;
 		// System.out.println(test);
 		UserEntity user = getUserFromCache();
-		TransactionsBeans res = null;
+		TransactionsEntity res = null;
 		// System.out.println(test);
 		if (user == null) {
 			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);

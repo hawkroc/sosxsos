@@ -2,7 +2,7 @@ package com.sosxsos.ssm.service.impl;
 
 import org.springframework.stereotype.Service;
 import com.sosxsos.ssm.entity.BananaEntity;
-import com.sosxsos.ssm.entity.TransactionsBeans;
+import com.sosxsos.ssm.entity.TransactionsEntity;
 import com.sosxsos.ssm.entity.UserEntity;
 import com.sosxsos.ssm.util.CacheUtil;
 import com.sosxsos.ssm.util.Const;
@@ -96,7 +96,7 @@ public void updateCacheUse(UserEntity u,String token) {
 	 * @return
 	 * @throws Exception
 	 */
-	public TransactionsBeans saveAndupdateTransaction(TransactionsBeans t) throws Exception{
+	public TransactionsEntity saveAndupdateTransaction(TransactionsEntity t) throws Exception{
 		
 		//dao.save("WebappuserMapper.saveTransactions", t);
 		CacheUtil.cacheSave(t.getId(), t, "Transactions");
@@ -105,13 +105,13 @@ public void updateCacheUse(UserEntity u,String token) {
 	
 	
 	
-public TransactionsBeans getTransactionFromCache(String id,String Cachename) throws Exception{
+public TransactionsEntity getTransactionFromCache(String id,String Cachename) throws Exception{
 		
 		//dao.save("WebappuserMapper.saveTransactions", t);
 	Element o = CacheUtil.getCacheObject(id, Cachename);
-	TransactionsBeans transactionsBeans=null;
+	TransactionsEntity transactionsBeans=null;
 	if(o!=null){
-		transactionsBeans=(TransactionsBeans)o.getObjectValue();
+		transactionsBeans=(TransactionsEntity)o.getObjectValue();
 	}
 		return transactionsBeans;
 	}
@@ -122,8 +122,8 @@ public TransactionsBeans getTransactionFromCache(String id,String Cachename) thr
  * @return
  * @throws Exception
  */
-public TransactionsBeans getTransactionFromCacheById(String id) throws Exception{
-	TransactionsBeans transactionsBeans=this.getTransactionFromCache(id, "Transactions");
+public TransactionsEntity getTransactionFromCacheById(String id) throws Exception{
+	TransactionsEntity transactionsBeans=this.getTransactionFromCache(id, "Transactions");
 	if(transactionsBeans==null){
 		 transactionsBeans=this.getTransactionFromCache(id, "TransactionsLong");	
 	}
@@ -138,7 +138,7 @@ public TransactionsBeans getTransactionFromCacheById(String id) throws Exception
  */
 public int checkTimeout(String transactionId) throws Exception{
 	int res=0;
-	TransactionsBeans tmp=this.getTransactionFromCacheById(transactionId);
+	TransactionsEntity tmp=this.getTransactionFromCacheById(transactionId);
 	if(tmp==null){
 		res=Const.zoningtimeout;
 		return res;

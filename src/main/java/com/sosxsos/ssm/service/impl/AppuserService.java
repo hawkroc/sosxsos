@@ -13,17 +13,19 @@ import com.sosxsos.ssm.dto.LoginRes;
 import com.sosxsos.ssm.dto.ResCommon;
 import com.sosxsos.ssm.dto.Resident;
 import com.sosxsos.ssm.dto.TheardingRes;
+import com.sosxsos.ssm.dto.request.CommonRequst;
 import com.sosxsos.ssm.entity.BananaEntity;
 import com.sosxsos.ssm.entity.BubbleEntity;
 import com.sosxsos.ssm.entity.LocationRangeEntity;
-import com.sosxsos.ssm.entity.LoginEntity;
+//import com.sosxsos.ssm.entity.LoginEntity;
+//import com.sosxsos.ssm.entity.LoginEntity;
 import com.sosxsos.ssm.entity.MediaEntity;
 import com.sosxsos.ssm.entity.ProductEntity;
 import com.sosxsos.ssm.entity.PushBean;
-import com.sosxsos.ssm.entity.SignUpEntity;
+//import com.sosxsos.ssm.entity.SignUpEntity;
 import com.sosxsos.ssm.entity.StatisticsEntity;
 import com.sosxsos.ssm.entity.Threading;
-import com.sosxsos.ssm.entity.TransactionsBeans;
+import com.sosxsos.ssm.entity.TransactionsEntity;
 import com.sosxsos.ssm.entity.UserEntity;
 import com.sosxsos.ssm.util.CacheUtil;
 import com.sosxsos.ssm.util.Const;
@@ -106,7 +108,7 @@ public class AppuserService {
 	 * @return
 	 * @throws Exception
 	 */
-	public LoginRes updateLoginAppUser(LoginEntity e) throws Exception {
+	public LoginRes updateLoginAppUser(CommonRequst e) throws Exception {
 		LoginRes loginResponse = null;
 
 		if (StringUtils.isNotEmpty(e.getPassword()) && StringUtils.isNotEmpty(e.getPhone())) {
@@ -165,11 +167,11 @@ public class AppuserService {
 	 * @return
 	 * @throws Exception
 	 */
-	public TransactionsBeans generateTransactionsBeans(UserEntity getby, long banana_id,UserEntity shareby) throws Exception {
+	public TransactionsEntity generateTransactionsBeans(UserEntity getby, long banana_id,UserEntity shareby) throws Exception {
 
 		long sharesby =shareby.getId();// this.getUserIdByBananaId(banana_id);
 		long getsby = getby.getId();
-		TransactionsBeans transactionsBeans = new TransactionsBeans();
+		TransactionsEntity transactionsBeans = new TransactionsEntity();
 		transactionsBeans.setId(MD5.md5(System.currentTimeMillis() + banana_id));
 		transactionsBeans.setStatus(Const.zoning);
 		transactionsBeans.setBanana_id(banana_id);
@@ -201,8 +203,8 @@ public class AppuserService {
 	 * @param status
 	 * @throws Exception
 	 */
-	public TransactionsBeans updateZoningTransaction(TransactionsBeans transactions, int status) throws Exception  {
-		TransactionsBeans transactionsBeans =transactions;
+	public TransactionsEntity updateZoningTransaction(TransactionsEntity transactions, int status) throws Exception  {
+		TransactionsEntity transactionsBeans =transactions;
 
 		if (transactionsBeans != null) {
 			transactionsBeans.setPrev_status(transactionsBeans.getStatus());
@@ -256,7 +258,7 @@ public class AppuserService {
 	 * @param t
 	 * @throws Exception
 	 */
-	public TransactionsBeans updateCommonTransaction(TransactionsBeans transactions, int status, Threading t)
+	public TransactionsEntity updateCommonTransaction(TransactionsEntity transactions, int status, Threading t)
 			throws Exception {
 		// TransactionsBeans transactionsBeans=
 		// cacheService.getTransactionFromCache(transactions_id,"TransactionsLong");
@@ -278,7 +280,7 @@ public class AppuserService {
 	 * @return
 	 * @throws Exception
 	 */
-	private TransactionsBeans saveAndupdateTransaction(TransactionsBeans t) throws Exception  {
+	private TransactionsEntity saveAndupdateTransaction(TransactionsEntity t) throws Exception  {
 		//t.setStatus(status);
 		dao.save("WebappuserMapper.saveTransactions", t);
 	//	System.out.println(t.getId());
@@ -301,8 +303,8 @@ public class AppuserService {
 	
 	}
 	
-	public TransactionsBeans queryTransactionsDetail(String id) throws Exception{
-		return (TransactionsBeans)	dao.findForObject("WebappuserMapper.queryTransactionsDetail", id);
+	public TransactionsEntity queryTransactionsDetail(String id) throws Exception{
+		return (TransactionsEntity)	dao.findForObject("WebappuserMapper.queryTransactionsDetail", id);
 	}
 	/**
 	 * 
@@ -495,7 +497,7 @@ public class AppuserService {
 	/*
 	 * 保存webapp用户
 	 */
-	public String saveAppUser(SignUpEntity p) throws Exception {
+	public String saveAppUser(CommonRequst p) throws Exception {
 		
 		dao.save("WebappuserMapper.saveU", p);
 		StatisticsEntity statisticsEntity= new StatisticsEntity();
@@ -504,7 +506,7 @@ public class AppuserService {
 		return this.getUserTokenAndPutCache(p.getPhone());
 	}
 
-	public String updateAppUserPassword(SignUpEntity p) throws Exception {
+	public String updateAppUserPassword(CommonRequst p) throws Exception {
 		dao.save("WebappuserMapper.updatePassword", p);
 		return this.getUserTokenAndPutCache(p.getPhone());
 	}

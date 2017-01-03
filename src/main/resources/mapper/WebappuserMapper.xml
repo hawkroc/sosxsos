@@ -2,15 +2,18 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="WebappuserMapper">
-    
-	<resultMap type="pd" id="residentMap">
+	<!-- select u.phone, u.id ,u.type -->
+	<resultMap type="resident" id="residentMap">
 		<id column="id" property="user_id" />
 		<result column="phone" property="phone" />
 		<result column="lon" property="lon" />
 		<result column="lat" property="lat" />
 	</resultMap>
 
-
+	<!-- <resultMap type="TransactionsBeans" id="TransactionsBeansList"> <id 
+		column="id" property="user_id" /> <result column="phone" property="phone" 
+		/> <result column="lon" property="lon" /> <result column="lat" property="lat" 
+		/> </resultMap> -->
 
 
 
@@ -54,7 +57,7 @@
 
 
 	<!-- update statistics -->
-	<update id="updateStatistics" parameterType="com.sosxsos.ssm.entity.StatisticsEntity">
+	<update id="updateStatistics" parameterType="com.fh.entity.StatisticsEntity">
 		UPDATE
 		`webapp_statistics`
 		SET `zoned`=
@@ -77,7 +80,7 @@
 
 	<!-- 新增transactions -->
 
-	<insert id="saveTransactions" parameterType="com.sosxsos.ssm.entity.TransactionsBeans">
+	<insert id="saveTransactions" parameterType="com.fh.entity.TransactionsBeans">
 		INSERT INTO
 		webapp_transactions
 		(id,status, prev_status,zone_time, ended_time,
@@ -93,7 +96,7 @@
 
 	<!-- update transactions -->
 
-	<update id="updateTransactions" parameterType="com.sosxsos.ssm.entity.TransactionsBeans">
+	<update id="updateTransactions" parameterType="com.fh.entity.TransactionsBeans">
 		UPDATE
 		webapp_transactions
 		SET
@@ -128,7 +131,7 @@
 
 
 	<select id="queryTransactionsDetail" parameterType="String"
-		resultType="com.sosxsos.ssm.entity.TransactionsBeans">
+		resultType="com.fh.entity.TransactionsBeans">
 		SELECT `id`, `status`, `prev_status`, `ended_time`,
 		`zone_time`,
 		`threading`, `getsby`, `sharesbby`, `banana_id`,
@@ -154,7 +157,7 @@
 
 	<!-- 新增buble -->
 
-	<insert id="saveThought" parameterType="com.sosxsos.ssm.entity.BubbleEntity"
+	<insert id="saveThought" parameterType="com.fh.entity.BubbleEntity"
 		useGeneratedKeys="true" keyProperty="id">
 		insert into
 		webapp_bubble (
@@ -225,7 +228,7 @@
 
 
 	<!-- check if the user in database -->
-	<select id="checkUserEntity" parameterType="String" resultType="com.sosxsos.ssm.entity.UserEntity">
+	<select id="checkUserEntity" parameterType="String" resultType="com.fh.entity.UserEntity">
 		select
 		*
 		from webapp_user
@@ -235,7 +238,7 @@
 
 
 
-	<select id="queryUser" parameterType="String" resultType="com.sosxsos.ssm.entity.UserEntity">
+	<select id="queryUser" parameterType="String" resultType="com.fh.entity.UserEntity">
 		select
 		*
 		from webapp_user 
@@ -272,7 +275,7 @@
 
 
 
-	<select id="loginByToken" parameterType="Login" resultType="pd">
+	<select id="loginByToken" parameterType="Login" resultType="LoginRes">
 		select u.status ,u.phone, u.id ,u.type ,t.thought from webapp_user u
 		left JOIN webapp_thought t on(u.id=t.userid)
 		where
@@ -284,6 +287,10 @@
 	<select id="searchResident" parameterType="locatRan" resultMap="residentMap">
 		select u.phone, u.id ,u.type ,u.lon, u.lat from webapp_user u
 		where
+		 loginTime> date_sub(#{current_time}, interval '02:00:00' hour_second)
+		 and
+		 u.phone!=#{phone}
+		 and
 		u.lat between #{minLat} and #{maxLat}
 		and
 		u.lon between #{minLng} and
@@ -299,7 +306,8 @@
 		set
 		lon = #{longitude},
 		lat= #{latitude},
-		status=1
+		status=2,
+		loginTime=NOW()
 		where
 		phone= #{phone}
 

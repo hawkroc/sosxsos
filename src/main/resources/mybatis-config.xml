@@ -76,10 +76,10 @@
 		
 		<typeAlias type="com.sosxsos.ssm.entity.LocationRangeEntity" alias="locatRan"/>
 		
-		
+			<!-- 
 		<typeAlias type="com.sosxsos.ssm.entity.LocationEntity" alias="location"/>
 		
-		<!-- 
+	
 		<typeAlias type="com.fh.controller.app.response.Resident" alias="resident"/>
 			<typeAlias type="com.fh.controller.app.response.LoginResponse" alias="LoginRes"/>
 			 -->

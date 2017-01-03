@@ -38,7 +38,7 @@ public class CacheUtil {
 	
 	
 	
-	public static Object getBananaFromCache(Object key,String cache_name,Class<?>... elementClasses) {
+	public static Object getObjectFromCache(Object key,String cache_name,Class<?>... elementClasses) {
 		Element o = CacheUtil.getCacheObject(key, cache_name);
 		Class<?> rs= null;
 		if (o != null) {

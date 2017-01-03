@@ -11,7 +11,7 @@
 - Tomcat8.0
 - Nginx
 
-#Datebase&cache#
+#Database&cache#
 - Mysql5.6 (update 5.7)
 - Redis3.2 (update 4.0)
 - Redis cluster

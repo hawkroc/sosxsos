@@ -24,8 +24,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sosxsos.ssm.dto.request.AddBananaAction;
-import com.sosxsos.ssm.dto.AddBananaRes;
-import com.sosxsos.ssm.dto.CheckThoughtRes;
+
 import com.sosxsos.ssm.dto.LoginRes;
 import com.sosxsos.ssm.dto.ResBase;
 import com.sosxsos.ssm.dto.ResCommon;
@@ -639,7 +638,7 @@ public class IntAppuserController extends BaseController {
 	public Object addBanana(@RequestParam("video") CommonsMultipartFile video,
 			@RequestParam("image") CommonsMultipartFile image, @RequestParam("json") String json,
 			HttpServletResponse response) {
-		AddBananaRes t = null;
+		ResCommon t = null;
 		String token =this.getToken();
 		if (checkToken()) {
 			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
@@ -704,7 +703,7 @@ public class IntAppuserController extends BaseController {
 			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 			return null;
 		}
-		CheckThoughtRes t = null;
+		ResCommon t = null;
 		try {
 			t = appuserService.checkBubbles(topic.trim(), key_word.trim());
 		} catch (Exception e) {

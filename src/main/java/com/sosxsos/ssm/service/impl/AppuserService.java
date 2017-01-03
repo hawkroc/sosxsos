@@ -9,9 +9,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import com.sosxsos.ssm.dao.DaoSupport;
-import com.sosxsos.ssm.dto.AddBananaRes;
-import com.sosxsos.ssm.dto.CheckThoughtRes;
 import com.sosxsos.ssm.dto.LoginRes;
+import com.sosxsos.ssm.dto.ResCommon;
 import com.sosxsos.ssm.dto.Resident;
 import com.sosxsos.ssm.dto.TheardingRes;
 import com.sosxsos.ssm.entity.BananaEntity;
@@ -403,12 +402,12 @@ public class AppuserService {
 	}
 
 	// need to be done
-	public CheckThoughtRes checkBubbles(String topic, String keyword) throws Exception {
+	public ResCommon checkBubbles(String topic, String keyword) throws Exception {
 
-		CheckThoughtRes rs = null;
+		ResCommon rs = null;
 
 		// r.getThought_idthougth();
-		rs = new CheckThoughtRes();
+		rs = new ResCommon();
 		// r.getThought_idthougth();
 		Element o = CacheUtil.getCacheObject(topic + keyword, "topickeywords_banana");
 		if (o != null) {
@@ -425,7 +424,7 @@ public class AppuserService {
 
 	// add throuts
 
-	public AddBananaRes saveBanana(BananaEntity banana, String token, String Imagepath, String Videopath)
+	public ResCommon saveBanana(BananaEntity banana, String token, String Imagepath, String Videopath)
 			throws Exception {
 
 		// List<Resident> residents = null;
@@ -436,7 +435,7 @@ public class AppuserService {
 		// residents = (List<Resident>)
 		// dao.findForObject("WebappuserMapper.searchResident", l);
 		// }
-		AddBananaRes residents = new AddBananaRes();
+		ResCommon residents = new ResCommon();
 		// String phone = getPhoneByTokenFromCache(token);
 		// //for test
 		// // phone="334455";

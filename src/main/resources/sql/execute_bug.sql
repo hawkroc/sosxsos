@@ -4,7 +4,7 @@ DELIMITER $$ -- 结束标志;转换为 $$
 -- 参数：in 输入参数; out 输出参数
 -- row_count():返回上一条修改类型sql(delete,insert,upodate)的影响行数
 -- row_count: 0:未修改数据; >0:表示修改的行数; <0:sql错误/未执行修改sql
-CREATE PROCEDURE `beauty_ssm`.`execute_buy`
+CREATE PROCEDURE `sosxsos`.`execute_buy`
 (IN  v_user_id BIGINT, 
  IN  v_goods_id BIGINT,
  IN  v_title VARCHAR(120), 

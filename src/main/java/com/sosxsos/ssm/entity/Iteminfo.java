@@ -8,6 +8,10 @@ public class Iteminfo implements Serializable {
 //     “price”: double
 	//    currencty string  人民币	CNY 美元	USD  新西兰元	NZD 澳大利亚元	AUD
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7017225188371095622L;
 	private String name;
 	public String getName() {
 		return name;

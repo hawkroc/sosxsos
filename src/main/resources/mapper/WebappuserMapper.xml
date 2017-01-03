@@ -20,7 +20,7 @@
 
 	<!-- 新增app用户 -->
 	<insert id="saveU" useGeneratedKeys="true" keyProperty="id"
-		parameterType="SignUp">
+		parameterType="commonRequst">
 		insert into webapp_user (
 		PASSWORD,
 		PHONE
@@ -57,7 +57,7 @@
 
 
 	<!-- update statistics -->
-	<update id="updateStatistics" parameterType="com.fh.entity.StatisticsEntity">
+	<update id="updateStatistics" parameterType="com.sosxsos.ssm.entity.StatisticsEntity">
 		UPDATE
 		`webapp_statistics`
 		SET `zoned`=
@@ -68,7 +68,7 @@
 
 
 	<!-- update password -->
-	<update id="updatePassword" parameterType="SignUp">
+	<update id="updatePassword" parameterType="commonRequst">
 		update webapp_user
 		set
 		PASSWORD = #{password}
@@ -80,7 +80,7 @@
 
 	<!-- 新增transactions -->
 
-	<insert id="saveTransactions" parameterType="com.fh.entity.TransactionsBeans">
+	<insert id="saveTransactions" parameterType="com.sosxsos.ssm.entity.TransactionsBeans">
 		INSERT INTO
 		webapp_transactions
 		(id,status, prev_status,zone_time, ended_time,
@@ -96,7 +96,7 @@
 
 	<!-- update transactions -->
 
-	<update id="updateTransactions" parameterType="com.fh.entity.TransactionsBeans">
+	<update id="updateTransactions" parameterType="com.sosxsos.ssm.entity.TransactionsBeans">
 		UPDATE
 		webapp_transactions
 		SET
@@ -131,7 +131,7 @@
 
 
 	<select id="queryTransactionsDetail" parameterType="String"
-		resultType="com.fh.entity.TransactionsBeans">
+		resultType="com.sosxsos.ssm.entity.TransactionsEntity">
 		SELECT `id`, `status`, `prev_status`, `ended_time`,
 		`zone_time`,
 		`threading`, `getsby`, `sharesbby`, `banana_id`,
@@ -150,14 +150,9 @@
 		id = #{id}
 	</select>
 
-
-
-
-
-
 	<!-- 新增buble -->
 
-	<insert id="saveThought" parameterType="com.fh.entity.BubbleEntity"
+	<insert id="saveThought" parameterType="com.sosxsos.ssm.entity.BubbleEntity"
 		useGeneratedKeys="true" keyProperty="id">
 		insert into
 		webapp_bubble (
@@ -228,7 +223,7 @@
 
 
 	<!-- check if the user in database -->
-	<select id="checkUserEntity" parameterType="String" resultType="com.fh.entity.UserEntity">
+	<select id="checkUserEntity" parameterType="String" resultType="com.sosxsos.ssm.entity.UserEntity">
 		select
 		*
 		from webapp_user
@@ -238,7 +233,7 @@
 
 
 
-	<select id="queryUser" parameterType="String" resultType="com.fh.entity.UserEntity">
+	<select id="queryUser" parameterType="String" resultType="com.sosxsos.ssm.entity.UserEntity">
 		select
 		*
 		from webapp_user 
@@ -275,7 +270,7 @@
 
 
 
-	<select id="loginByToken" parameterType="Login" resultType="LoginRes">
+	<select id="loginByToken" parameterType="Login" resultType="commonRequst">
 		select u.status ,u.phone, u.id ,u.type ,t.thought from webapp_user u
 		left JOIN webapp_thought t on(u.id=t.userid)
 		where
@@ -301,7 +296,7 @@
 
 
 	<!-- 存入location -->
-	<update id="saveLocation" parameterType="location">
+	<update id="saveLocation" parameterType="locatRan">
 		update webapp_user
 		set
 		lon = #{longitude},

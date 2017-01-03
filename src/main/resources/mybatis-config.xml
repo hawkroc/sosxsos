@@ -70,24 +70,18 @@
 		
 		<!-- webapp model -->
 		
-		<typeAlias type="com.sosxsos.ssm.entity.SignUpEntity" alias="SignUp"/>
-		<typeAlias type="com.sosxsos.ssm.entity.LoginEntity" alias="Login"/>
-		
-		
-		<typeAlias type="com.sosxsos.ssm.entity.LocationRangeEntity" alias="locatRan"/>
-		
-			<!-- 
-		<typeAlias type="com.sosxsos.ssm.entity.LocationEntity" alias="location"/>
-		
+		<typeAlias type="com.sosxsos.ssm.dto.request.CommonRequst" alias="commonRequst"/>
 	
-		<typeAlias type="com.fh.controller.app.response.Resident" alias="resident"/>
-			<typeAlias type="com.fh.controller.app.response.LoginResponse" alias="LoginRes"/>
-			 -->
+		
+
+			 
+			 <typeAlias type="com.sosxsos.ssm.dto.Resident" alias="resident"/>
+		<typeAlias type="com.sosxsos.ssm.entity.LocationRangeEntity" alias="locatRan"/>
 				<typeAlias type="com.sosxsos.ssm.entity.ProductEntity" alias="product"/>
 				
 					<typeAlias type="com.sosxsos.ssm.entity.BananaEntity" alias="banana"/>
 		
-					<typeAlias type="com.sosxsos.ssm.entity.TransactionsBeans" alias="TransactionsBeans"/>	
+					<typeAlias type="com.sosxsos.ssm.entity.TransactionsEntity" alias="TransactionsBeans"/>	
 		
 	</typeAliases>
     

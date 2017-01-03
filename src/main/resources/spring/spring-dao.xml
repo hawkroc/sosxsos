@@ -72,7 +72,10 @@
         <property name="basePackage" value="com.sosxsos.ssm.dao"/>
     </bean>
 
-
+    
+    <bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg ref="sqlSessionFactory" />
+	</bean>
 
   <!-- 异步线程池 -->  
   <bean id="threadsPool" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">  

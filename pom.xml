@@ -11,6 +11,7 @@
 		<maven.build.timestamp.format>yyyyMMdd</maven.build.timestamp.format>
 		<quartz.version>2.2.1</quartz.version>
 		<spring.version>4.3.2.RELEASE</spring.version>
+		<json.version>2.7.4</json.version>
 		<jersey.version>1.18.1</jersey.version>
 		<mysql-connector-java.version>[6.0.5,)</mysql-connector-java.version>
 	</properties>
@@ -239,12 +240,42 @@
 			<artifactId>spring-webmvc</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
-
+<!--  
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
 			<version>2.7.4</version>
 		</dependency>
+		-->
+		
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>${json.version}</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>${json.version}</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+			<version>${json.version}</version>
+		</dependency>
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		<!--springmvc end -->
 
 		<!--mybatis 数据访问层 start -->

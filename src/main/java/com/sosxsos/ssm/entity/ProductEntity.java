@@ -3,7 +3,7 @@ package com.sosxsos.ssm.entity;
 import java.util.List;
 
 
-import com.sosxsos.ssm.util.JsonUtil;
+import com.sosxsos.ssm.util.JacksonUtil;
 
 public class ProductEntity {
 private Iteminfo Item_info;
@@ -19,7 +19,7 @@ private String productInfoByJson;
 public String getProductInfoByJson() {
 	String json=null;
 	if(this.Item_info!=null){
-	json= JsonUtil.beanToJson(this.Item_info);
+	json= JacksonUtil.toJSon(this.Item_info);
 	}
 return json;
 	
@@ -27,7 +27,7 @@ return json;
 public String getTagsByJson() {
 	String json=null;
 	if(this.tags!=null){
-	json= JsonUtil.beanToJson(this.tags);
+	json= JacksonUtil.toJSon(this.tags);
 	}
 return json;
 }

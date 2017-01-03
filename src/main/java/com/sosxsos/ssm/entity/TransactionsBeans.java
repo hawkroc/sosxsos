@@ -1,6 +1,6 @@
 package com.sosxsos.ssm.entity;
 
-import com.sosxsos.ssm.util.JsonUtil;
+import com.sosxsos.ssm.util.JacksonUtil;
 
 public class TransactionsBeans {
 	// {
@@ -156,7 +156,7 @@ public class TransactionsBeans {
 	public String getJsonFromThreading() {
 		String json = null;
 		if (this.threading != null) {
-			json = JsonUtil.beanToJson(this.threading);
+			json = JacksonUtil.toJSon((this.threading));
 
 		}
 

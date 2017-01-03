@@ -2,7 +2,7 @@ package com.sosxsos.ssm.dto;
 
 import java.util.List;
 
-public class ResidentsListResponse implements ResBase {
+public class ResidentsListRes implements ResBase {
 private int residents;
 
 public int getResidents() {

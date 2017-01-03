@@ -2,7 +2,7 @@ package com.sosxsos.ssm.dto;
 
 import com.sosxsos.ssm.entity.BubbleEntity;
 
-public class LoginResponse  {
+public class LoginRes  {
 
 //	//private int id;
 //	public int getId() {

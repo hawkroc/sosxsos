@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import com.sosxsos.ssm.dao.DaoSupport;
 import com.sosxsos.ssm.dto.AddBananaRes;
 import com.sosxsos.ssm.dto.CheckThoughtRes;
-import com.sosxsos.ssm.dto.LoginResponse;
+import com.sosxsos.ssm.dto.LoginRes;
 import com.sosxsos.ssm.dto.Resident;
 import com.sosxsos.ssm.dto.TheardingRes;
 import com.sosxsos.ssm.entity.BananaEntity;
@@ -107,8 +107,8 @@ public class AppuserService {
 	 * @return
 	 * @throws Exception
 	 */
-	public LoginResponse updateLoginAppUser(LoginEntity e) throws Exception {
-		LoginResponse loginResponse = null;
+	public LoginRes updateLoginAppUser(LoginEntity e) throws Exception {
+		LoginRes loginResponse = null;
 
 		if (StringUtils.isNotEmpty(e.getPassword()) && StringUtils.isNotEmpty(e.getPhone())) {
 			Object temp = dao.findForObject("WebappuserMapper.login", e);
@@ -118,7 +118,7 @@ public class AppuserService {
 			Integer id = (int) temp;
 
 			if (id != null) {
-				loginResponse = new LoginResponse();
+				loginResponse = new LoginRes();
 				// dao.update("WebappuserMapper.saveLocation", e);
 				loginResponse.setUser_token(getUserTokenAndPutCache(e.getPhone()));
 			}
@@ -129,8 +129,8 @@ public class AppuserService {
 			if (user != null) {
 				String phone = user.getPhone();
 				e.setPhone(phone);
-				loginResponse = new LoginResponse();
-				loginResponse = (LoginResponse) dao.findForObject("WebappuserMapper.loginByToken", phone);
+				loginResponse = new LoginRes();
+				loginResponse = (LoginRes) dao.findForObject("WebappuserMapper.loginByToken", phone);
 				// dao.update("WebappuserMapper.saveLocation", e);
 			}
 

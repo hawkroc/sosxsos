@@ -4,13 +4,13 @@ var handler = {
 	//封装相关ajax的url
 	URL : {
 		goodsList : function() {
-			return '/sosxsos/goods/list';
+			return 'http://127.0.0.1:8081/sosxsos/goods/list';
 		},
 		userList : function() {
-			return '/sosxsos/user/list';
+			return 'http://127.0.0.1:8081/sosxsos/user/list';
 		},
 		goodsBuy : function(goodsId) {
-			return '/sosxsos/goods/' + goodsId + '/buy';
+			return 'http://127.0.0.1:8081/sosxsos/goods/' + goodsId + '/buy';
 		}
 	},
 	//验证手机号

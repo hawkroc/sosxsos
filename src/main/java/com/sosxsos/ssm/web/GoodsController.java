@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CookieValue;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -19,7 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.List;
-
+@CrossOrigin(maxAge = 3600)
 @Controller
 @RequestMapping("/goods")
 public class GoodsController {
@@ -45,6 +46,7 @@ public class GoodsController {
 	 * @param limit
 	 * @return
 	 */
+	@CrossOrigin(origins = "http://127.0.0.1")
 	@RequestMapping(value = "/list", method = RequestMethod.GET, produces = { "application/json;charset=UTF-8" })
 	@ResponseBody
 	public BootStrapTableResult<Goods> list(Integer offset, Integer limit) {

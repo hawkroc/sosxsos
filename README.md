@@ -1,5 +1,5 @@
  [TOC]
-##Software##
+#Software#
 - JDK8
 - Spring4.3
 - Mybaits
@@ -11,7 +11,7 @@
 - Tomcat8.0
 - Nginx
 
-#Database&cache#
+#Database&Cache#
 - Mysql5.6 (update 5.7)
 - Redis3.2 (update 4.0)
 - Redis cluster

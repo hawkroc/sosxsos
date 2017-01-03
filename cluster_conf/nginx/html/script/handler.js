@@ -4,13 +4,13 @@ var handler = {
 	//封装相关ajax的url
 	URL : {
 		goodsList : function() {
-			return '/beauty_ssm_cluster/goods/list';
+			return '/sosxsos/goods/list';
 		},
 		userList : function() {
-			return '/beauty_ssm_cluster/user/list';
+			return '/sosxsos/user/list';
 		},
 		goodsBuy : function(goodsId) {
-			return '/beauty_ssm_cluster/goods/' + goodsId + '/buy';
+			return '/sosxsos/goods/' + goodsId + '/buy';
 		}
 	},
 	//验证手机号

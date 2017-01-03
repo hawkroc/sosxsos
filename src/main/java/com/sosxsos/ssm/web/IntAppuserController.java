@@ -540,12 +540,7 @@ public class IntAppuserController extends BaseController {
 		
 			appuserService.updateUserProfile(userEntity);
 
-			// AddBananaAction addBananaAction = mapper.readValue(json,
-			// AddBananaAction.class);
-			// System.out.println("test key word: " +
-			// addBananaAction.getBanana().getBubble().getKey_word());
-			// t = appuserService.saveBanana(addBananaAction.getBanana(), token,
-			// i, v);
+		
 		} catch (Exception e) {
 			// TODO: handle exception
 			response.setStatus(HttpServletResponse.SC_BAD_GATEWAY);

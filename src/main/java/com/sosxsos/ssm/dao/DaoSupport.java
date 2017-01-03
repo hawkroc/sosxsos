@@ -79,9 +79,10 @@ public class DaoSupport implements DAO {
 
 				sqlSession.flushStatements();
 				sqlSession.commit();
-				sqlSession.clearCache();
+				//sqlSession.clearCache();
 			}
 		} finally {
+			sqlSession.clearCache();
 			sqlSession.close();
 		}
 

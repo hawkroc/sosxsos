@@ -1,6 +1,6 @@
 package com.sosxsos.ssm.entity;
 
-public class BubbleEntity extends BaseEntity {
+public class BubbleEntity  {
 	/**
 	 * 
 	 */

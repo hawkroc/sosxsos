@@ -1,6 +1,6 @@
 package com.sosxsos.ssm.entity;
 
-public class BananaEntity extends BaseEntity {
+public class BananaEntity {
 	/**
 	 * { “action_type”: int, “banana”: { “bubble”: { “topic”: int, “key_word”:
 	 * string } “product: { “selling_reason”: int, “item_info”: { “name”:

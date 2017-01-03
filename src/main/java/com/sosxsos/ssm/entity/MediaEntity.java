@@ -1,6 +1,6 @@
 package com.sosxsos.ssm.entity;
 
-public class MediaEntity   extends BaseEntity {
+public class MediaEntity   {
 	/**
 	 * 
 	 */

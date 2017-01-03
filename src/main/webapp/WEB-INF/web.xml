@@ -28,7 +28,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>DruidStatView</servlet-name>
-		<url-pattern>/druid/*</url-pattern>
+		<url-pattern>/dfd03gdfgjjfdfdf/*</url-pattern>
 	</servlet-mapping>
 
 	<filter>

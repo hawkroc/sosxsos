@@ -22,7 +22,7 @@ import com.sosxsos.ssm.service.impl.SmsService;
 @Controller
 @RequestMapping(value = "/appuser")
 @SessionAttributes("test")
-public class IntAppuserController {
+public class IntAppuserController extends BaseController {
 	@Autowired
 	private HttpServletRequest request;
 	@Resource(name = "appuserService")

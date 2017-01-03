@@ -1,13 +1,11 @@
 package com.sosxsos.ssm.service.impl;
 
 import org.springframework.stereotype.Service;
-
 import com.sosxsos.ssm.entity.BananaEntity;
 import com.sosxsos.ssm.entity.TransactionsBeans;
 import com.sosxsos.ssm.entity.UserEntity;
 import com.sosxsos.ssm.util.CacheUtil;
 import com.sosxsos.ssm.util.Const;
-
 import net.sf.ehcache.Element;
 
 @Service("cacheService")

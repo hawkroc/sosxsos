@@ -31,5 +31,17 @@ public class LocationRangeEntity{
 		public void setMaxLng(double maxLng) {
 			this.maxLng = maxLng;
 		}
-		private double minLng; private double maxLat;private double maxLng;
+		private double minLng; private double maxLat;private double maxLng;private String current_time;private String phone;
+		public String getPhone() {
+			return phone;
+		}
+		public void setPhone(String phone) {
+			this.phone = phone;
+		}
+		public String getCurrent_time() {
+			return current_time;
+		}
+		public void setCurrent_time(String current_time) {
+			this.current_time = current_time;
+		}
 	}

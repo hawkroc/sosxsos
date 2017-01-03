@@ -1,5 +1,7 @@
 package com.sosxsos.ssm.util;
 
+import com.sosxsos.ssm.entity.LocationRangeEntity;
+
 //import com.fh.entity.LocationRangeEntity;
 
 
@@ -75,8 +77,7 @@ public static LatLonUtil getInstance() {
 		// 获取最大经度
 		Double maxLng = longitude + radiusLng;
 		
-		System.out.println("jingdu " + minLat + "weidu " + minLng + "zuidajingdu "
-				+ maxLat + "zuidaweidu " + maxLng);
+	
 
 		return new LocationRangeEntity(minLat, minLng, maxLat, maxLng);
 	}
@@ -86,39 +87,39 @@ public static LatLonUtil getInstance() {
 		
 	}
 
-public class LocationRangeEntity{
-	public 	LocationRangeEntity(double minLat,double  minLng, double maxLat, double maxLng){
-		this.setMaxLat(maxLat);
-		this.setMaxLng(maxLng);
-		this.setMinLat(minLat);
-		this.setMinLng(minLng);
-	}
-		private double minLat; public double getMinLat() {
-			return minLat;
-		}
-		public void setMinLat(double minLat) {
-			this.minLat = minLat;
-		}
-		public double getMinLng() {
-			return minLng;
-		}
-		public void setMinLng(double minLng) {
-			this.minLng = minLng;
-		}
-		public double getMaxLat() {
-			return maxLat;
-		}
-		public void setMaxLat(double maxLat) {
-			this.maxLat = maxLat;
-		}
-		public double getMaxLng() {
-			return maxLng;
-		}
-		public void setMaxLng(double maxLng) {
-			this.maxLng = maxLng;
-		}
-		private double minLng; private double maxLat;private double maxLng;
-	}
+//public class LocationRangeEntity{
+//	public 	LocationRangeEntity(double minLat,double  minLng, double maxLat, double maxLng){
+//		this.setMaxLat(maxLat);
+//		this.setMaxLng(maxLng);
+//		this.setMinLat(minLat);
+//		this.setMinLng(minLng);
+//	}
+//		private double minLat; public double getMinLat() {
+//			return minLat;
+//		}
+//		public void setMinLat(double minLat) {
+//			this.minLat = minLat;
+//		}
+//		public double getMinLng() {
+//			return minLng;
+//		}
+//		public void setMinLng(double minLng) {
+//			this.minLng = minLng;
+//		}
+//		public double getMaxLat() {
+//			return maxLat;
+//		}
+//		public void setMaxLat(double maxLat) {
+//			this.maxLat = maxLat;
+//		}
+//		public double getMaxLng() {
+//			return maxLng;
+//		}
+//		public void setMaxLng(double maxLng) {
+//			this.maxLng = maxLng;
+//		}
+//		private double minLng; private double maxLat;private double maxLng;
+//	}
 	
 	
 	//测试方法

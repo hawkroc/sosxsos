@@ -53,6 +53,23 @@ public class LoginEntity {
 	private double current_lat;
 	private double current_lng;
 
+	
+	public String getVerification_code() {
+		return verification_code;
+	}
+	public void setVerification_code(String verification_code) {
+		this.verification_code = verification_code;
+	}
+	
+	private String verification_code;
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
+	private String type;
+	
 
 
 }

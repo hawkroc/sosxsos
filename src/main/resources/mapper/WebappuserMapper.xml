@@ -80,7 +80,7 @@
 
 	<!-- 新增transactions -->
 
-	<insert id="saveTransactions" parameterType="com.sosxsos.ssm.entity.TransactionsBeans">
+	<insert id="saveTransactions" parameterType="TransactionsBeans">
 		INSERT INTO
 		webapp_transactions
 		(id,status, prev_status,zone_time, ended_time,
@@ -96,7 +96,7 @@
 
 	<!-- update transactions -->
 
-	<update id="updateTransactions" parameterType="com.sosxsos.ssm.entity.TransactionsBeans">
+	<update id="updateTransactions" parameterType="TransactionsBeans">
 		UPDATE
 		webapp_transactions
 		SET
@@ -131,7 +131,7 @@
 
 
 	<select id="queryTransactionsDetail" parameterType="String"
-		resultType="com.sosxsos.ssm.entity.TransactionsEntity">
+		resultType="TransactionsBeans">
 		SELECT `id`, `status`, `prev_status`, `ended_time`,
 		`zone_time`,
 		`threading`, `getsby`, `sharesbby`, `banana_id`,
@@ -149,6 +149,11 @@
 		where
 		id = #{id}
 	</select>
+
+
+
+
+
 
 	<!-- 新增buble -->
 
@@ -252,7 +257,7 @@
 
 	<!-- login with thought -->
 
-	<select id="login" parameterType="Login" resultType="java.lang.Integer">
+	<select id="login" parameterType="commonRequst" resultType="java.lang.Integer">
 		select u.id
 		from webapp_user u
 		where
@@ -270,7 +275,7 @@
 
 
 
-	<select id="loginByToken" parameterType="Login" resultType="commonRequst">
+	<select id="loginByToken" parameterType="commonRequst" resultType="com.sosxsos.ssm.dto.LoginRes">
 		select u.status ,u.phone, u.id ,u.type ,t.thought from webapp_user u
 		left JOIN webapp_thought t on(u.id=t.userid)
 		where
@@ -291,9 +296,6 @@
 		u.lon between #{minLng} and
 		#{maxLng}
 	</select>
-
-
-
 
 	<!-- 存入location -->
 	<update id="saveLocation" parameterType="locatRan">
@@ -343,13 +345,6 @@
 		phone= #{phone}
 
 	</update>
-
-
-
-
-
-
-
 
 
 	<!-- update status -->

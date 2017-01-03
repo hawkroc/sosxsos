@@ -1,1 +1,1 @@
-![](https://github.com/hawkroc/sosxsos.git/screenshots/sosxsos.png)
+![](https://raw.githubusercontent.com/hawkroc/sosxsos/master/screenshots/sosxsos.png)

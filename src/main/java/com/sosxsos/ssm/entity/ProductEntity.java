@@ -1,11 +1,12 @@
 package com.sosxsos.ssm.entity;
 
+import java.io.Serializable;
 import java.util.List;
 
 
 import com.sosxsos.ssm.util.JacksonUtil;
 
-public class ProductEntity {
+public class ProductEntity implements Serializable {
 private Iteminfo Item_info;
 
 public Iteminfo getItem_info() {

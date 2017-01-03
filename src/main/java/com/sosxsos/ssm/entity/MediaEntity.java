@@ -1,6 +1,8 @@
 package com.sosxsos.ssm.entity;
 
-public class MediaEntity   {
+import java.io.Serializable;
+
+public class MediaEntity  implements Serializable {
 	/**
 	 * 
 	 */

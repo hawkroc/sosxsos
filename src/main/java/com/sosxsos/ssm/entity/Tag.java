@@ -1,6 +1,6 @@
 package com.sosxsos.ssm.entity;
 
-public class Tag extends BaseEntity{
+public class Tag {
 //	  tag: int,
 //      value1: string,
 //      value2: string,

@@ -1,6 +1,8 @@
 package com.sosxsos.ssm.entity;
 
-public class BubbleEntity  {
+import java.io.Serializable;
+
+public class BubbleEntity implements Serializable {
 	/**
 	 * 
 	 */

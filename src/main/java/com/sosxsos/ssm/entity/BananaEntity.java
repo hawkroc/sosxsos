@@ -1,6 +1,8 @@
 package com.sosxsos.ssm.entity;
 
-public class BananaEntity {
+import java.io.Serializable;
+
+public class BananaEntity implements Serializable{
 	/**
 	 * { “action_type”: int, “banana”: { “bubble”: { “topic”: int, “key_word”:
 	 * string } “product: { “selling_reason”: int, “item_info”: { “name”:

@@ -1,6 +1,8 @@
 package com.sosxsos.ssm.entity;
 
-public class ResidentEntity {
+import java.io.Serializable;
+
+public class ResidentEntity implements Serializable{
 
 //{
 //“residents”: [{

@@ -1,8 +1,10 @@
 package com.sosxsos.ssm.entity;
 
+import java.io.Serializable;
+
 import com.sosxsos.ssm.util.JacksonUtil;
 
-public class TransactionsEntity {
+public class TransactionsEntity implements Serializable{
 	// {
 	// "status": 0,
 	// "prev_status": 0,

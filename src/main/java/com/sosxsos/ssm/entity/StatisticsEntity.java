@@ -1,6 +1,8 @@
 package com.sosxsos.ssm.entity;
 
-public class StatisticsEntity {
+import java.io.Serializable;
+
+public class StatisticsEntity implements Serializable {
 	
 public int getZoned() {
 		return zoned;

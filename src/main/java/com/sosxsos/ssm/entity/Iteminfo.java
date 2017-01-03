@@ -1,6 +1,8 @@
 package com.sosxsos.ssm.entity;
 
-public class Iteminfo {
+import java.io.Serializable;
+
+public class Iteminfo implements Serializable {
 //	 “name”: string,
 //     “desc”: string,
 //     “price”: double

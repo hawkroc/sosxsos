@@ -139,13 +139,13 @@
 			<artifactId>quartz</artifactId>
 			<version>${quartz.version}</version>
 		</dependency>
-
-
+<!-- 
 		<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>fastjson</artifactId>
 			<version>1.2.8</version>
 		</dependency>
+ -->
 
 		<dependency>
 			<groupId>org.hibernate</groupId>
@@ -154,7 +154,7 @@
 		</dependency>
 		<!--common end -->
 
-		<!--spring start -->
+		<!--spring start potostuff-->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-core</artifactId>
@@ -240,6 +240,8 @@
 			<artifactId>spring-webmvc</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
+		
+		<!--springmvc end -->
 <!--  
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
@@ -268,15 +270,8 @@
 			<version>${json.version}</version>
 		</dependency>
 		
+	
 		
-		
-		
-		
-		
-		
-		
-		
-		<!--springmvc end -->
 
 		<!--mybatis 数据访问层 start -->
 		<dependency>
@@ -342,6 +337,21 @@
 			<artifactId>protostuff-runtime</artifactId>
 			<version>[1.0.8,1.2.0)</version>
 		</dependency>
+		<!--
+		<dependency>
+  <groupId>io.protostuff</groupId>
+  <artifactId>protostuff-core</artifactId>
+  <version>1.5.2</version>
+</dependency>
+
+		<dependency>
+  <groupId>io.protostuff</groupId>
+  <artifactId>protostuff-runtime</artifactId>
+  <version>1.5.2</version>
+</dependency>
+		 -->
+		
+		
 		<!-- potostuff end -->
 
 	</dependencies>

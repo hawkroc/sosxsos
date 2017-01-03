@@ -10,6 +10,7 @@ import com.dyuproject.protostuff.ProtostuffIOUtil;
 import com.dyuproject.protostuff.Schema;
 import com.dyuproject.protostuff.runtime.RuntimeSchema;
 
+
 /**
  * 序列话工具
  */

@@ -5,7 +5,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.sosxsos.ssm.entity.BananaEntity;
 
 //hkhkhu
-public class AddBananaAction {
+public class AddBananaRequest {
 //	{
 //	      “action_type”: int,
 //	      “banana”: {

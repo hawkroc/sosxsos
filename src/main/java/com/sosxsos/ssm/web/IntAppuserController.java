@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sosxsos.ssm.dto.request.AddBananaAction;
+import com.sosxsos.ssm.dto.request.AddBananaRequest;
 
 import com.sosxsos.ssm.dto.LoginRes;
 import com.sosxsos.ssm.dto.ResBase;
@@ -672,7 +672,7 @@ public class IntAppuserController extends BaseController {
 			video.transferTo(newVideo);
 			image.transferTo(newImage);
 
-			AddBananaAction addBananaAction = mapper.readValue(json, AddBananaAction.class);
+			AddBananaRequest addBananaAction = mapper.readValue(json, AddBananaRequest.class);
 			// System.out.println("test key word: " +
 			// addBananaAction.getBanana().getBubble().getKey_word());
 			t = appuserService.saveBanana(addBananaAction.getBanana(), token, i, v);

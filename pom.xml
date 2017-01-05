@@ -338,7 +338,7 @@
 	<!-- Build Settings -->
 	<!--http://maven.apache.org/pom.html#Build_Settings -->
 	<build>
-		<finalName>${project.artifactId}_${project.version}_${maven.build.timestamp}</finalName>
+		<finalName>${project.artifactId}_${project.version}</finalName>
 		<resources>
 			<resource>
 				<!--directory: 资源所在的位置 -->
@@ -360,6 +360,12 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
 				<version>2.6</version>
+				
+				<configuration> 
+               <outputDirectory>C:\xampp\tomcat8\webapps</outputDirectory> 
+           </configuration> 
+				
+				
 			</plugin>
 		</plugins>
 	</build>

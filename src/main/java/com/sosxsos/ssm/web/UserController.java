@@ -48,7 +48,7 @@ public class UserController {
 	@RequestMapping(value = "/list", method = RequestMethod.GET, produces = { "application/json;charset=UTF-8" })
 	@ResponseBody
 	public BootStrapTableResult<User> list(Integer offset, Integer limit,HttpServletResponse response) {
-		LOG.error(("invoke----------/user/list"));
+		LOG.info(("invoke----------/user/list"));
 	//	response.setHeader("Access-Control-Allow-Origin:", "");
 	//	Access-Control-Allow-Origin: http://http://127.0.0.1
 		offset = offset == null ? 0 : offset;//默认便宜0

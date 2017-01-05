@@ -23,7 +23,8 @@ public class ProtoStuffSerializerUtil {
 	 */
 	public static <T> byte[] serialize(T obj) {
 		if (obj == null) {
-			throw new RuntimeException("序列化对象(" + obj + ")!");
+			return null;
+			//throw new RuntimeException("序列化对象(" + obj + ")!");
 		}
 		@SuppressWarnings("unchecked")
 		Schema<T> schema = (Schema<T>) RuntimeSchema.getSchema(obj.getClass());
@@ -35,6 +36,7 @@ public class ProtoStuffSerializerUtil {
 			throw new RuntimeException("序列化(" + obj.getClass() + ")对象(" + obj + ")发生异常!", e);
 		} finally {
 			buffer.clear();
+			
 		}
 		return protostuff;
 	}
@@ -47,7 +49,8 @@ public class ProtoStuffSerializerUtil {
 	 */
 	public static <T> T deserialize(byte[] paramArrayOfByte, Class<T> targetClass) {
 		if (paramArrayOfByte == null || paramArrayOfByte.length == 0) {
-			throw new RuntimeException("反序列化对象发生异常,byte序列为空!");
+			return null;
+			//throw new RuntimeException("反序列化对象发生异常,byte序列为空!");
 		}
 		T instance = null;
 		try {
@@ -67,7 +70,8 @@ public class ProtoStuffSerializerUtil {
 	 */
 	public static <T> byte[] serializeList(List<T> objList) {
 		if (objList == null || objList.isEmpty()) {
-			throw new RuntimeException("序列化对象列表(" + objList + ")参数异常!");
+			return null;
+			//throw new RuntimeException("序列化对象列表(" + objList + ")参数异常!");
 		}
 		@SuppressWarnings("unchecked")
 		Schema<T> schema = (Schema<T>) RuntimeSchema.getSchema(objList.get(0).getClass());
@@ -102,7 +106,8 @@ public class ProtoStuffSerializerUtil {
 	 */
 	public static <T> List<T> deserializeList(byte[] paramArrayOfByte, Class<T> targetClass) {
 		if (paramArrayOfByte == null || paramArrayOfByte.length == 0) {
-			throw new RuntimeException("反序列化对象发生异常,byte序列为空!");
+			return null;
+			//throw new RuntimeException("反序列化对象发生异常,byte序列为空!");
 		}
 
 		Schema<T> schema = RuntimeSchema.getSchema(targetClass);

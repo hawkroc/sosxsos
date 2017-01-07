@@ -13,6 +13,7 @@
 		<spring.version>4.3.2.RELEASE</spring.version>
 		<json.version>2.7.4</json.version>
 		<jersey.version>1.18.1</jersey.version>
+			<mybatis.version>3.4.0</mybatis.version>
 		<mysql-connector-java.version>[6.0.5,)</mysql-connector-java.version>
 	</properties>
 
@@ -286,7 +287,7 @@
 		<dependency>
 			<groupId>org.mybatis</groupId>
 			<artifactId>mybatis</artifactId>
-			<version>3.4.0</version>
+			<version>${mybatis.version}</version>
 		</dependency>
 
 		<dependency>
@@ -338,7 +339,7 @@
 	<!-- Build Settings -->
 	<!--http://maven.apache.org/pom.html#Build_Settings -->
 	<build>
-		<finalName>${project.artifactId}_${project.version}</finalName>
+		<finalName>${project.artifactId}_${maven.build.timestamp}</finalName>
 		<resources>
 			<resource>
 				<!--directory: 资源所在的位置 -->

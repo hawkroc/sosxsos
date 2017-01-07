@@ -1252,7 +1252,7 @@ public class IntAppuserController extends BaseController {
 	// 9.1 Get user profile
 
 	// https://api.sosxsos.com/v1/residents/#
-	@RequestMapping(value = { "/residents/{id}/profile" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "/residents//profile/{id}" }, method = RequestMethod.GET)
 	@ResponseBody
 	public ResProfile getResidents(HttpServletResponse response) {
 

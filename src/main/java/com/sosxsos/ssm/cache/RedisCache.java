@@ -168,7 +168,7 @@ public class RedisCache {
 		return this.putListCacheWithExpireTime(key, objList, expireTime);
 	}
 
-	/**
+	/**This method be inovked by others
 	 * 
 	 * @param key
 	 * @param targetClass

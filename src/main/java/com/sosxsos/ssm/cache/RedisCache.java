@@ -143,8 +143,30 @@ public class RedisCache {
 		deleteCacheWithPattern(RedisCache.CAHCENAME + "|*");
 	}
 	
+	/**
+	 * 
+	 * @param key
+	 * @param obj
+	 * @return
+	 */
+	public <T> boolean updateCache(final String key, T obj,final long expireTime) {
+		deleteCache(key);
+		return this.putCacheWithExpireTime(key, obj, expireTime);
+	}
 	
 	
+	
+	/**
+	 * 
+	 * @param key
+	 * @param objList
+	 * @param expireTime
+	 * @return
+	 */
+	public <T> boolean updateListCacheWithExpireTime(final String key, List<T> objList, final long expireTime) {
+		deleteCache(key);
+		return this.putListCacheWithExpireTime(key, objList, expireTime);
+	}
 
 	/**
 	 * 

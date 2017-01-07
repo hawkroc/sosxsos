@@ -1,11 +1,16 @@
 package com.sosxsos.ssm.service.impl;
 
+import javax.annotation.Resource;
+
 import org.springframework.stereotype.Service;
+
+import com.sosxsos.ssm.cache.RedisCache;
 import com.sosxsos.ssm.entity.BananaEntity;
 import com.sosxsos.ssm.entity.TransactionsEntity;
 import com.sosxsos.ssm.entity.UserEntity;
 import com.sosxsos.ssm.util.CacheUtil;
 import com.sosxsos.ssm.util.Const;
+
 import net.sf.ehcache.Element;
 
 @Service("cacheService")
@@ -17,7 +22,14 @@ public class CacheService {
  * @param u
  * @param token
  */
+	@Resource(name = "redisCache")
+	private RedisCache redisCache;
 	
+	/**
+	 * 
+	 * @param code
+	 * @return
+	 */
 	public boolean checkCodeByFrontEnd(int code){
 		Element o = CacheUtil.getCacheObject(code, "common");
 	//	UserEntity user = null;

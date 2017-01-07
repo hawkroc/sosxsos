@@ -20,7 +20,7 @@ import com.sosxsos.ssm.util.ProtoStuffSerializerUtil;
 public class RedisCache {
 
 	public final static String CAHCENAME = "cache";// 缓存名
-	public final static int CAHCETIME = 60;// 默认缓存时间
+	public final static int CAHCETIME = 3600;// 默认缓存时间
 
 	@Autowired
 	private RedisTemplate<String, String> redisTemplate;
@@ -32,7 +32,7 @@ public class RedisCache {
 	 * @return
 	 */
 	public <T> boolean putCache(final String key, T obj) {
-		return this.putObjectCacheWithExpireTime(key, obj, 0);
+		return this.putObjectCacheWithExpireTime(key, obj, CAHCETIME);
 	}
 
 	/**
@@ -65,7 +65,7 @@ public class RedisCache {
 	 * @return
 	 */
 	public <T> boolean putListCache(final String key, List<T> objList) {
-		return this.putObjectListCacheWithExpireTime(key, objList, 0);
+		return this.putObjectListCacheWithExpireTime(key, objList, CAHCETIME);
 	}
 
 	/**

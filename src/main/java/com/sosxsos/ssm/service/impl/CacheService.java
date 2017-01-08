@@ -8,13 +8,14 @@ import com.sosxsos.ssm.cache.RedisCache;
 import com.sosxsos.ssm.entity.BananaEntity;
 import com.sosxsos.ssm.entity.TransactionsEntity;
 import com.sosxsos.ssm.entity.UserEntity;
+import com.sosxsos.ssm.service.CacheServiceRedis;
 import com.sosxsos.ssm.util.CacheUtil;
 import com.sosxsos.ssm.util.Const;
 
 import net.sf.ehcache.Element;
 
 @Service("cacheService")
-public class CacheService {
+public class CacheService implements CacheServiceRedis {
 	// userCache
 	// userCacheEntity
 /**
@@ -25,11 +26,10 @@ public class CacheService {
 	@Resource(name = "redisCache")
 	private RedisCache redisCache;
 	
-	/**
-	 * 
-	 * @param code
-	 * @return
+	/* (non-Javadoc)
+	 * @see com.sosxsos.ssm.service.impl.CacheServiceRedis#checkCodeByFrontEnd(int)
 	 */
+	@Override
 	public boolean checkCodeByFrontEnd(int code){
 		Element o = CacheUtil.getCacheObject(code, "common");
 	//	UserEntity user = null;
@@ -43,7 +43,7 @@ public class CacheService {
 		long codetime = (long) o.getObjectValue();
 		long sec = ((System.currentTimeMillis()) - codetime) / 1000;
 		if(sec<Const.secEx){
-			return true;
+		    rs=true;
 		}
 		CacheUtil.removeCache(code, "common");
 		return rs;
@@ -54,6 +54,10 @@ public class CacheService {
 	
 	
 	
+/* (non-Javadoc)
+ * @see com.sosxsos.ssm.service.impl.CacheServiceRedis#updateCacheUse(com.sosxsos.ssm.entity.UserEntity, java.lang.String)
+ */
+@Override
 public void updateCacheUse(UserEntity u,String token) {
 	
 		CacheUtil.updateCache(token, u, "userCacheEntity");
@@ -61,6 +65,10 @@ public void updateCacheUse(UserEntity u,String token) {
 		CacheUtil.updateCache(u.getId(), u, "userCacheEntityByid");
 	
 }
+	/* (non-Javadoc)
+	 * @see com.sosxsos.ssm.service.impl.CacheServiceRedis#removeUserCache(java.lang.String, com.sosxsos.ssm.entity.UserEntity)
+	 */
+	@Override
 	public void removeUserCache(String token,UserEntity u) {
 		CacheUtil.removeCache(token, "userCache");
 		CacheUtil.removeCache(token, "userCacheEntity");
@@ -69,11 +77,10 @@ public void updateCacheUse(UserEntity u,String token) {
 	}
 
 
-	/**
-	 * 
-	 * @param token
-	 * @return
+	/* (non-Javadoc)
+	 * @see com.sosxsos.ssm.service.impl.CacheServiceRedis#getUserByTokenFromCache(java.lang.String)
 	 */
+	@Override
 	public UserEntity getUserByTokenFromCache(String token) {
 		Element o = CacheUtil.getCacheObject(token, "userCacheEntity");
 		UserEntity user = null;
@@ -85,11 +92,10 @@ public void updateCacheUse(UserEntity u,String token) {
 	
 
 	
-	/**
-	 * 
-	 * @param token
-	 * @return
+	/* (non-Javadoc)
+	 * @see com.sosxsos.ssm.service.impl.CacheServiceRedis#getUserByTokenFromCache(int)
 	 */
+	@Override
 	public UserEntity getUserByTokenFromCache(int userid) {
 		Element o = CacheUtil.getCacheObject(userid, "userCacheEntityByid");
 		UserEntity user = null;
@@ -102,12 +108,10 @@ public void updateCacheUse(UserEntity u,String token) {
 	
 	
 	// Transactions
-	/**
-	 * 
-	 * @param t
-	 * @return
-	 * @throws Exception
+	/* (non-Javadoc)
+	 * @see com.sosxsos.ssm.service.impl.CacheServiceRedis#saveAndupdateTransaction(com.sosxsos.ssm.entity.TransactionsEntity)
 	 */
+	@Override
 	public TransactionsEntity saveAndupdateTransaction(TransactionsEntity t) throws Exception{
 		
 		//dao.save("WebappuserMapper.saveTransactions", t);
@@ -117,6 +121,10 @@ public void updateCacheUse(UserEntity u,String token) {
 	
 	
 	
+/* (non-Javadoc)
+ * @see com.sosxsos.ssm.service.impl.CacheServiceRedis#getTransactionFromCache(java.lang.String, java.lang.String)
+ */
+@Override
 public TransactionsEntity getTransactionFromCache(String id,String Cachename) throws Exception{
 		
 		//dao.save("WebappuserMapper.saveTransactions", t);
@@ -128,12 +136,10 @@ public TransactionsEntity getTransactionFromCache(String id,String Cachename) th
 		return transactionsBeans;
 	}
 	
-/**
- * 
- * @param id
- * @return
- * @throws Exception
+/* (non-Javadoc)
+ * @see com.sosxsos.ssm.service.impl.CacheServiceRedis#getTransactionFromCacheById(java.lang.String)
  */
+@Override
 public TransactionsEntity getTransactionFromCacheById(String id) throws Exception{
 	TransactionsEntity transactionsBeans=this.getTransactionFromCache(id, "Transactions");
 	if(transactionsBeans==null){
@@ -142,12 +148,10 @@ public TransactionsEntity getTransactionFromCacheById(String id) throws Exceptio
      
 	return transactionsBeans;
 }
-/**
- * 
- * @param transactionId
- * @return
- * @throws Exception
+/* (non-Javadoc)
+ * @see com.sosxsos.ssm.service.impl.CacheServiceRedis#checkTimeout(java.lang.String)
  */
+@Override
 public int checkTimeout(String transactionId) throws Exception{
 	int res=0;
 	TransactionsEntity tmp=this.getTransactionFromCacheById(transactionId);
@@ -162,10 +166,10 @@ public int checkTimeout(String transactionId) throws Exception{
 	return res;
 	
 }
-/**
- * 
- * @param id
+/* (non-Javadoc)
+ * @see com.sosxsos.ssm.service.impl.CacheServiceRedis#removeTransactionsFromCache(java.lang.String)
  */
+@Override
 public void removeTransactionsFromCache(String id){
 	CacheUtil.removeCache(id, "Transactions");
 	CacheUtil.removeCache(id, "TransactionsLong");
@@ -175,11 +179,10 @@ public void removeTransactionsFromCache(String id){
 	// UserBanana
 
 
-/**
- * 
- * @param phone
- * @return
+/* (non-Javadoc)
+ * @see com.sosxsos.ssm.service.impl.CacheServiceRedis#getBananaFromCache(java.lang.String)
  */
+@Override
 public BananaEntity getBananaFromCache(String phone) {
 	Element o = CacheUtil.getCacheObject(phone, "UserBanana");
 	BananaEntity rs = null;
@@ -189,6 +192,10 @@ public BananaEntity getBananaFromCache(String phone) {
 	return rs;
 }
 	// UserBananaId
+	/* (non-Javadoc)
+	 * @see com.sosxsos.ssm.service.impl.CacheServiceRedis#getBananaFromCacheById(long)
+	 */
+	@Override
 	public BananaEntity getBananaFromCacheById(long banana_id) {
 		Element o = CacheUtil.getCacheObject(banana_id, "UserBananaId");
 		String phone = null;
@@ -204,10 +211,10 @@ public BananaEntity getBananaFromCache(String phone) {
 	}
 	
 	
-	/**
-	 * 
-	 * @param banana_id
+	/* (non-Javadoc)
+	 * @see com.sosxsos.ssm.service.impl.CacheServiceRedis#updateBananaFromCacheByid(long, int)
 	 */
+	@Override
 	public BananaEntity updateBananaFromCacheByid(long banana_id,int status){
 		Element o = CacheUtil.getCacheObject(banana_id, "UserBananaId");
 		String phone = null;
@@ -226,10 +233,10 @@ public BananaEntity getBananaFromCache(String phone) {
 		
 	}
 	
-	/**
-	 * 
-	 * @param banana_id
+	/* (non-Javadoc)
+	 * @see com.sosxsos.ssm.service.impl.CacheServiceRedis#removeBananaFromCacheByid(long)
 	 */
+	@Override
 	public void removeBananaFromCacheByid(long banana_id){
 		
 		Element o = CacheUtil.getCacheObject(banana_id, "UserBananaId");

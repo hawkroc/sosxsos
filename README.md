@@ -1,4 +1,8 @@
  [TOC]
+#Summary
+This project is for an android application backend . Design and coding by Peng Yin (Roc) Test by (Jay He)
+Pressure Test: 10000 Res/s, 1000 Current/s
+This project is for app backend which aff
 #Software#
 - JDK8
 - Spring4.3

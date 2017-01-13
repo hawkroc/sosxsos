@@ -3,13 +3,14 @@ package com.sosxsos.ssm.util;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import com.fasterxml.jackson.databind.util.JSONPObject;
 
 public class AppUtil  {
 	
-	protected static Logger logger = Logger.getLogger(AppUtil.class);
-	
+	//protected static Logger logger = Logger.getLogger(AppUtil.class);
+	private static final Logger logger = LogManager.getLogger(AppUtil.class);	
 	public static void main(String[] args) {
 		PageData pd = new PageData();
 		pd.put("username", "zhangsan");

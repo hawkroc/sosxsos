@@ -3,7 +3,7 @@
 - This project is for an android application backend .
 - Design and coding by Peng Yin (Roc) 
   Test by Jay He
-- Pressure Test: 7000 Res/s, 800 concurrent/s
+- Pressure Test: 100000 res/s, 1000 concurrent/s
 
 #Software#
 - JDK8

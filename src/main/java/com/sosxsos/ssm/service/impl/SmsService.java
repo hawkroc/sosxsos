@@ -39,7 +39,6 @@ private String phone;
   * @param content
   */
   private void sendMessage(){
-	  System.out.println(content+phone);
 	  Message message = Message.creator(new PhoneNumber(phone), new PhoneNumber("+61451266222"),
 			  content).create();
   }

@@ -27,7 +27,7 @@ import com.sosxsos.ssm.entity.StatisticsEntity;
 import com.sosxsos.ssm.entity.Threading;
 import com.sosxsos.ssm.entity.TransactionsEntity;
 import com.sosxsos.ssm.entity.UserEntity;
-import com.sosxsos.ssm.util.CacheUtil;
+//import com.sosxsos.ssm.util.CacheUtil;
 import com.sosxsos.ssm.util.Const;
 import com.sosxsos.ssm.util.DateUtil;
 import com.sosxsos.ssm.util.LatLonUtil;
@@ -284,8 +284,9 @@ public class AppuserService {
 		//t.setStatus(status);
 		dao.save("WebappuserMapper.saveTransactions", t);
 	//	System.out.println(t.getId());
-		CacheUtil.cacheSave(t.getId(), t, "TransactionsLong");
-		CacheUtil.removeCache(t.getId(), "Transactions");
+//		CacheUtil.cacheSave(t.getId(), t, "TransactionsLong");
+//		CacheUtil.removeCache(t.getId(), "Transactions");
+		cacheService.saveAndupdateTransaction(t);
 		return t;
 
 	}
@@ -327,13 +328,16 @@ public class AppuserService {
 	 */
 	private String getUserTokenAndPutCache(String phone) throws Exception {
 		String token =MD5.md5((phone + System.currentTimeMillis()));
-		CacheUtil.cacheSave(token, phone, "userCache");
+		
 		UserEntity use = (UserEntity) dao.findForObject("WebappuserMapper.queryUser", phone);
-		CacheUtil.cacheSave(token, use, "userCacheEntity");
+		
 	if(use==null){
 		System.out.println("this is null");
 	}
-		CacheUtil.cacheSave(use.getId(), use, "userCacheEntityByid");
+//	CacheUtil.cacheSave(token, use, "userCacheEntity");
+//	CacheUtil.cacheSave(token, phone, "userCache");
+//		CacheUtil.cacheSave(use.getId(), use, "userCacheEntityByid");
+	cacheService.saveUserCache(use, token, phone);
 		return token;
 
 	}
@@ -410,15 +414,12 @@ public class AppuserService {
 
 		// r.getThought_idthougth();
 		rs = new ResCommon();
-		// r.getThought_idthougth();
-		Element o = CacheUtil.getCacheObject(topic + keyword, "topickeywords_banana");
-		if (o != null) {
-			BananaEntity b = cacheService.getBananaFromCache((String) o.getObjectValue());
-			// rs.setImage_url(thoughtEntity.getVedio_url());
-			// rs.setVideo_url(thoughtEntity.getImage_url());
-
-			rs.setVideo_url(b.getBubble().getVideo_url());
-		}
+	
+       BananaEntity bananaEntity=  cacheService.geBananaEntityByKeyword(topic,keyword);
+       if(bananaEntity!=null){
+    	   rs.setVideo_url(bananaEntity.getBubble().getVideo_url());
+       }
+		
 
 		return rs;
 
@@ -472,9 +473,12 @@ public class AppuserService {
 		mediaEntity.setImage_url(Imagepath);
 		mediaEntity.setVideo_url(Videopath);
 		banana.setMedia((mediaEntity));
-		CacheUtil.cacheSave(phone, banana, "UserBanana");
-		CacheUtil.cacheSave(banana.getId(), phone, "UserBananaId");
-		CacheUtil.cacheSave(t.getTopic() + t.getKey_word(), phone, "topickeywords_banana");
+
+		
+//		CacheUtil.cacheSave(phone, banana, "UserBanana");
+//		CacheUtil.cacheSave(banana.getId(), phone, "UserBananaId");
+//		CacheUtil.cacheSave(t.getTopic() + t.getKey_word(), phone, "topickeywords_banana");
+		cacheService.saveBananaCache(banana,phone);
 		// residents.setStatus(0);
 		// residents.setThought_id(t.getId());
 		residents.setBanana_id(banana.getId());

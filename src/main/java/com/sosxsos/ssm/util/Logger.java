@@ -1,7 +1,7 @@
 package com.sosxsos.ssm.util;
 
 
-public class Logger {
+public class Logger  {
 
 	private org.apache.log4j.Logger logger;
 

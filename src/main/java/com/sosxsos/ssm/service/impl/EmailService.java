@@ -14,10 +14,11 @@ import com.sun.jersey.core.util.MultivaluedMapImpl;
 import com.sun.jersey.multipart.FormDataMultiPart;
 import com.sun.jersey.multipart.file.FileDataBodyPart;
 @Service("emailService")
-public class EmailService implements Runnable {
-	private static String domain = "mail.sosxsos.com";
-	private static String pubkey = "pubkey-cdaaaccad370f3134b14933dcfa4a260";
-	private static String key = "key-29af45b614e8a3a330f3af36d1e6ac58";
+public class EmailService {//implements Runnable {
+	private final static String domain = "mail.sosxsos.com";
+	private final static String pubkey = "pubkey-cdaaaccad370f3134b14933dcfa4a260";
+	private final static String key = "key-29af45b614e8a3a330f3af36d1e6ac58";
+	private final static String mailFrom="Excited User <mailgun@mail.sosxsos.com>";
 private	String maill;
 
 
@@ -38,7 +39,7 @@ private int code;
 	  	 * 
 	  	 * @return
 	  	 */
-	  	private  ClientResponse sendSimpleMessage() {
+	  	public  ClientResponse sendSimpleMessage(String verified_email,int verification_code ) {
 	  	       Client client = Client.create();
 	  	       client.addFilter(new HTTPBasicAuthFilter("api",
 	  	                       key));
@@ -46,12 +47,12 @@ private int code;
 	  	               client.resource("https://api.mailgun.net/v3/"+domain +
 	  	                               "/messages");
 	  	       MultivaluedMapImpl formData = new MultivaluedMapImpl();
-	  	       formData.add("from", "Excited User <mailgun@mail.sosxsos.com>");
+	  	       formData.add("from", mailFrom);
 	  	      // formData.add("to", "yinpengroc@gmail.com");
-	  	       formData.add("to", this.maill);
+	  	       formData.add("to", verified_email);
 	  	      // System.out.println("dsfsdfd receive the email" +this.maill);
 	  	       formData.add("subject", "Dot reply sosxsos verification");
-	  	       formData.add("text", "verification code is !  "+this.code);
+	  	       formData.add("text", "verification code is !  "+verification_code);
 	  	       return webResource.type(MediaType.APPLICATION_FORM_URLENCODED).
 	  	               post(ClientResponse.class, formData);
 	  	}
@@ -99,11 +100,11 @@ private int code;
 
 
 
-	@Override
-	public void run() {
-		// TODO Auto-generated method stub
-		System.out.println("send email");
-		this.sendSimpleMessage();
-		
-	}
+//	@Override
+//	public void run() {
+//		// TODO Auto-generated method stub
+//		System.out.println("send email");
+//		this.sendSimpleMessage();
+//		
+//	}
 }

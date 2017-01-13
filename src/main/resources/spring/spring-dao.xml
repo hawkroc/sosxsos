@@ -76,13 +76,32 @@
     <bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg ref="sqlSessionFactory" />
 	</bean>
+<!-- 
 
+<task:executor />配置参数：
+id：当配置多个executor时，被@Async("id")指定使用；也被作为线程名的前缀。
+pool-size：
+core size：最小的线程数，缺省：1
+max size：最大的线程数，缺省：Integer.MAX_VALUE
+queue-capacity：当最小的线程数已经被占用满后，新的任务会被放进queue里面，当这个queue的capacity也被占满之后，
+pool里面会创建新线程处理这个任务，直到总线程数达到了max size，这时系统会拒绝这个任务并抛出TaskRejectedException异常（缺省配置的情况下，可以通过rejection-policy来决定如何处理这种情况）。缺省值为：Integer.MAX_VALUE
+keep-alive：超过core size的那些线程，任务完成后，再经过这个时长（秒）会被结束掉
+rejection-policy：当pool已经达到max size的时候，如何处理新任务
+ABORT（缺省）：抛出TaskRejectedException异常，然后不执行
+DISCARD：不执行，也不抛出异常
+DISCARD_OLDEST：丢弃queue中最旧的那个任务
+CALLER_RUNS：不在新线程中执行任务，而是有调用者所在的线程来执行
+
+配置例子：
+
+
+ -->
   <!-- 异步线程池 -->  
   <bean id="threadsPool" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">  
     <!-- 核心线程数  -->  
-    <property name="corePoolSize" value="3" />  
+    <property name="corePoolSize" value="5" />  
     <!-- 最大线程数 -->  
-    <property name="maxPoolSize" value="10" />  
+    <property name="maxPoolSize" value="15" />  
     <!-- 队列最大长度 >=mainExecutor.maxSize -->  
     <property name="queueCapacity" value="1000" />  
     <!-- 线程池维护线程所允许的空闲时间 -->  

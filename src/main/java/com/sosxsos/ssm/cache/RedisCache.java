@@ -205,6 +205,7 @@ public class RedisCache {
 			public Boolean doInRedis(RedisConnection connection) throws DataAccessException {
 				if (expireTime == 0) {
 					connection.setEx(bkey, expireTime, bvalue);
+					
 				} else {
 					return connection.setNX(bkey, bvalue);
 				}

@@ -1,5 +1,7 @@
 package com.sosxsos.ssm.service.impl;
 
+import java.net.URL;
+
 import org.springframework.stereotype.Service;
 
 import com.sosxsos.ssm.entity.PushMessageBean;
@@ -10,28 +12,20 @@ import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 
 @Service("pushNotificationService")
-public class PushNotificationService {
+public class PushNotificationService  {
 
 	FirebaseOptions options = null;
-	private final String contentKey = "Content-Type";
-	private final String contentName = "application/json";
+	private static final String contentKey = "Content-Type";
+	private static final String contentName = "application/json";
+	private static final String URL = "https://fcm.googleapis.com/fcm/send";
+	private static final String AuthorizationName = "Authorization";
+	private static final String Authorization = "key=AIzaSyAJ6M6y2O81iJDhhGWcbzH7b788R3Zdj_k";
 
-	/**
-	 * 
-	 * @throws UnirestException
-	 */
-	public void pushMessage(PushMessageBean message) throws UnirestException {
-		HttpResponse<JsonNode> response = Unirest.post("https://fcm.googleapis.com/fcm/send")
-				.header(contentKey, contentName).body(message).asJson();
-		// Unirest.
-		System.out.println(response.getBody().getArray().toString());
+	// static String key =
+	// "cmyTYjk0PlM:APA91bGRJwN-53L6RSpHiUCpJuk7at969T9erYJGeX0_SYfRaQ_eREM2P71t7lS0u4eM0K-3UAYQkCXShwDqZuj4wWkN6hMlsaVuL1tmfrt0u5hnUi9-Cp7mufAngINK0BvBlEfNPY8S";
 
-	}
-
-	static String key = "cmyTYjk0PlM:APA91bGRJwN-53L6RSpHiUCpJuk7at969T9erYJGeX0_SYfRaQ_eREM2P71t7lS0u4eM0K-3UAYQkCXShwDqZuj4wWkN6hMlsaVuL1tmfrt0u5hnUi9-Cp7mufAngINK0BvBlEfNPY8S";
-
-	//static String server_key = "AAAAI7XCZBk:APA91bGIsZn5vYjRg4r15AIO25Or4jVBSFDjiHxBgeP8K6DP8eUCRzW2pCDIHwmVgZq4CIaU-MY9jDv8W6qLflqQqOYu-5CS3M1-d2KLpjshtrMV_wgl90q22gpSluR3Yw0tOy4YsvS9clgc1spWNXgmyar3OYBZVg";
-	static String Authorization = "key=AIzaSyAJ6M6y2O81iJDhhGWcbzH7b788R3Zdj_k";
+	// static String server_key =
+	// "AAAAI7XCZBk:APA91bGIsZn5vYjRg4r15AIO25Or4jVBSFDjiHxBgeP8K6DP8eUCRzW2pCDIHwmVgZq4CIaU-MY9jDv8W6qLflqQqOYu-5CS3M1-d2KLpjshtrMV_wgl90q22gpSluR3Yw0tOy4YsvS9clgc1spWNXgmyar3OYBZVg";
 
 	/**
 	 * 1.zoning_requests 2.
@@ -39,15 +33,19 @@ public class PushNotificationService {
 	 * @param message
 	 * @throws UnirestException
 	 */
-	public void pushNotifiction(PushMessageBean message) throws UnirestException {
-		HttpResponse<JsonNode> response = Unirest.post("https://fcm.googleapis.com/fcm/send")
-				.header("Authorization", Authorization).header(contentKey, contentName).body(message).asJson();
+	public final void pushNotifiction(PushMessageBean message) throws UnirestException {
+		HttpResponse<JsonNode> response = Unirest.post(URL).header(AuthorizationName, Authorization)
+				.header(contentKey, contentName).body(message).asJson();
 
 		System.out.println(response.getBody().getArray().toString());
 
 		// push message
 
 	}
+
+	
+
+	//}
 
 	//
 	// After spending some hours I found that in Postman you have to put the

@@ -15,7 +15,6 @@ public class BaseController implements InitializingBean {
 	
 	
     Logger logger = LogManager.getLogger("warn_log");  
-    Logger logger2 = LogManager.getLogger("error_log");  
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		// TODO Auto-generated method stub

@@ -61,6 +61,7 @@
         </RollingRandomAccessFile>
         <!-- info日志格式 -->
         <RollingRandomAccessFile name="info_appender" immediateFlush="false" fileName="${LOG_HOME}/info.log" filePattern="${LOG_HOME}/Error.log.%d{yyyy-MM-dd}.info.gz">
+           
             <PatternLayout>
                 <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %class{36} %L %M -- %msg%xEx%n</pattern>
             </PatternLayout>
@@ -83,13 +84,20 @@
         </Async>
     </Appenders>
     <Loggers>
-        <!-- 配置日志的根节点 -->
-        <root level="debug">
-            <appender-ref ref="Console" />
+        <!-- 配置日志的根节点 开发-->
+        <root level="info">
+            <appender-ref ref="Console"/>
             <appender-ref ref="AsyncError" />
             <appender-ref ref="AsyncWarn" />
             <appender-ref ref="AsyncInfo" />
         </root>
+   <!-- 配置日志的根节点 生产
+   <root level="info">
+            <appender-ref ref="AsyncError" />
+            <appender-ref ref="AsyncWarn" />
+            <appender-ref ref="AsyncInfo" />
+        </root>
+   -->
         <!-- 第三方日志系统 -->
         <logger name="org.springframework.core" level="warn" />
         <logger name="org.springframework.beans" level="warn" />

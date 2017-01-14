@@ -112,10 +112,10 @@
 			<version>1.7.5</version> </dependency> -->
 		<!-- log -->
 
-	
-		
-		
-		
+
+
+
+
 		<!-- Logging use log4j2 -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
@@ -140,6 +140,15 @@
 			<artifactId>log4j-core</artifactId>
 			<version>${log4j.version}</version>
 		</dependency>
+
+		<dependency>
+			<groupId>com.lmax</groupId>
+			<artifactId>disruptor</artifactId>
+			<version>3.3.6</version>
+		</dependency>
+
+
+
 		<!--用于与slf4j保持桥接 -->
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>

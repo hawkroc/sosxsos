@@ -2,6 +2,8 @@ package com.sosxsos.ssm.util;
 
 import org.springframework.context.ApplicationContext;
 
+import com.twilio.rest.api.v2010.account.usage.record.ThisMonth;
+
 
 /**
  * 项目名称：
@@ -66,6 +68,15 @@ public class Const {
       public static final String Imagepath = "/usr/share/nginx/html/image/";//"C:/" + new Date().getTime() + video.getOriginalFilename();	
       public static final String profile = "/usr/share/nginx/html/profile/";
       public static final String Videopath = "/usr/share/nginx/html/video/";
+  	//private static final String script="ffmpeg -i "+ name+ " -y -f image2 -t 0.001 -s 352x240 "+name+".jpg";
+      
+      
+      public static  String  getThumbNailImagePath(String name){
+    	  name=Videopath+name;
+    	  return "ffmpeg -i "+ name+ " -y -f image2 -t 0.001 -s 352x240 "+name+".jpg";
+      }
+      
+      
       
       public static final String testImagepath = "C:/image/";//"C:/" + new Date().getTime() + video.getOriginalFilename();	
       public static final String testVideopath = "C:/video/";

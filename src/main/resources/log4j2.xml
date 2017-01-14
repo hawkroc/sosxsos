@@ -1,30 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <!--
     status : 这个用于设置log4j2自身内部的信息输出,可以不设置,当设置成trace时,会看到log4j2内部各种详细输出
     monitorInterval : Log4j能够自动检测修改配置文件和重新配置本身, 设置间隔秒数。
 -->
 <Configuration status="WARN" monitorInterval="600">
-
     <Properties>
         <!-- 配置日志文件输出目录 -->
-        <Property name="LOG_HOME">/Users/hanhan.zhang/logs</Property>
+        <Property name="LOG_HOME">C:\xampp\Tomcat8\logs\sosxsos</Property>
+        <property name="FILE_NAME">mylog</property>
+        <!-- 配置日志文件输出目录生产
+        <Property name="LOG_HOME">/Users/log/logs</Property>
+        
+        -->
     </Properties>
-
     <Appenders>
-
         <!--这个输出控制台的配置-->
         <Console name="Console" target="SYSTEM_OUT">
             <!-- 控制台只输出level及以上级别的信息(onMatch),其他的直接拒绝(onMismatch) -->
-            <ThresholdFilter level="trace" onMatch="ACCEPT" onMismatch="DENY"/>
+            <ThresholdFilter level="trace" onMatch="ACCEPT" onMismatch="DENY" />
             <!-- 输出日志的格式 -->
-            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %class{36} %L %M - %msg%xEx%n"/>
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %class{36} %L %M - %msg%xEx%n" />
         </Console>
-
         <!-- 设置日志格式并配置日志压缩格式(service.log.年份.gz) -->
-        <RollingRandomAccessFile name="service_appender"
-                                 immediateFlush="false" fileName="${LOG_HOME}/service.log"
-                                 filePattern="${LOG_HOME}/service.log.%d{yyyy-MM-dd}.log.gz">
+        <RollingRandomAccessFile name="warn_appender" immediateFlush="false" fileName="${LOG_HOME}/warn.log" filePattern="${LOG_HOME}/warn.log.%d{yyyy-MM-dd}.warn.gz">
             <!--
                 %d{yyyy-MM-dd HH:mm:ss, SSS} : 日志生产时间
                 %p : 日志输出格式
@@ -41,49 +39,71 @@
                 <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %class{36} %L %M -- %msg%xEx%n</pattern>
             </PatternLayout>
             <Policies>
-                <TimeBasedTriggeringPolicy interval="1" modulate="true" />
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="10 MB" />
             </Policies>
+            <Filters>
+                <ThresholdFilter level="warn" onMatch="ACCEPT" onMismatch="DENY" />
+            </Filters>
         </RollingRandomAccessFile>
-
-
-        <!-- DEBUG日志格式 -->
-        <RollingRandomAccessFile name="service_debug_appender"
-                                 immediateFlush="false" fileName="${LOG_HOME}/service.log"
-                                 filePattern="${LOG_HOME}/service.log.%d{yyyy-MM-dd}.debug.gz">
+        <!-- ErrorFile日志格式 -->
+        <RollingRandomAccessFile name="error_appender" immediateFlush="false" fileName="${LOG_HOME}/Error.log" filePattern="${LOG_HOME}/Error.log.%d{yyyy-MM-dd}.Error.gz">
             <PatternLayout>
                 <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %class{36} %L %M -- %msg%xEx%n</pattern>
             </PatternLayout>
             <Policies>
-                <TimeBasedTriggeringPolicy interval="1" modulate="true" />
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="10 MB" />
             </Policies>
+            <Filters>
+                <ThresholdFilter level="error" onMatch="ACCEPT" onMismatch="DENY" />
+            </Filters>
         </RollingRandomAccessFile>
+        <!-- info日志格式 -->
+        <RollingRandomAccessFile name="info_appender" immediateFlush="false" fileName="${LOG_HOME}/info.log" filePattern="${LOG_HOME}/Error.log.%d{yyyy-MM-dd}.info.gz">
+            <PatternLayout>
+                <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %class{36} %L %M -- %msg%xEx%n</pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="10 MB" />
+            </Policies>
+            <Filters>
+                <ThresholdFilter level="info" onMatch="ACCEPT" onMismatch="DENY" />
+            </Filters>
+        </RollingRandomAccessFile>
+        <Async name="AsyncInfo">
+            <AppenderRef ref="info_appender" />
+        </Async>
+        <Async name="AsyncWarn">
+            <AppenderRef ref="warn_appender" />
+        </Async>
+        <Async name="AsyncError">
+            <AppenderRef ref="error_appender" />
+        </Async>
     </Appenders>
-
     <Loggers>
         <!-- 配置日志的根节点 -->
         <root level="debug">
-            <appender-ref ref="Console"/>
+            <appender-ref ref="Console" />
+            <appender-ref ref="AsyncError" />
+            <appender-ref ref="AsyncWarn" />
+            <appender-ref ref="AsyncInfo" />
         </root>
-
         <!-- 第三方日志系统 -->
-        <logger name="org.springframework.core" level="info"/>
-        <logger name="org.springframework.beans" level="info"/>
-        <logger name="org.springframework.context" level="info"/>
-        <logger name="org.springframework.web" level="info"/>
-        <logger name="org.jboss.netty" level="warn"/>
-        <logger name="org.apache.http" level="warn"/>
-
+        <logger name="org.springframework.core" level="warn" />
+        <logger name="org.springframework.beans" level="warn" />
+        <logger name="org.springframework.context" level="warn" />
+        <logger name="org.springframework.web" level="warn" />
+        <logger name="org.apache.http" level="warn" />
         <!-- 日志实例(info),其中'service-log'继承root,但是root将日志输出控制台,而'service-log'将日志输出到文件,通过属性'additivity="false"'将'service-log'的
              的日志不再输出到控制台 -->
-        <logger name="service_log" level="info" includeLocation="true" additivity="true">
-            <appender-ref ref="service_appender"/>
+        <logger name="warn_log" level="warn" includeLocation="true" additivity="true">
+            <appender-ref ref="AsyncWarn" />
         </logger>
-
-        <!-- 日志实例(debug) -->
-        <logger name="service_log" level="debug" includeLocation="true" additivity="false">
-            <appender-ref ref="service_debug_appender"/>
+        <!-- 日志实例(ErrorFile) -->
+        <logger name="error_log" level="error" includeLocation="true" additivity="true">
+            <appender-ref ref="AsyncError" />
         </logger>
-
     </Loggers>
-
 </Configuration>

@@ -25,8 +25,8 @@ import com.sosxsos.ssm.dto.BaseResult;
 public class BindingResultAop {
 
    // private final Logger LOG = LoggerFactory.getLogger(this.getClass());
-
-    private final  Logger logger = LogManager.getLogger("warn_log");  
+//fix
+    //private final  Logger logger = LogManager.getLogger("warn_log");  
     @Pointcut("execution(* com.sosxsos.ssm.web.*.*(..))")
     public void pointCutMethod(){}
 

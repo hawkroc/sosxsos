@@ -24,8 +24,7 @@ import com.sosxsos.ssm.dto.BaseResult;
 @Aspect
 public class BindingResultAop {
 
-   // private final Logger LOG = LoggerFactory.getLogger(this.getClass());
-//fix
+   // private final Logger LOG = LoggerFactory.getLogger(this.getClass());type name = new type();
     //private final  Logger logger = LogManager.getLogger("warn_log");  
     @Pointcut("execution(* com.sosxsos.ssm.web.*.*(..))")
     public void pointCutMethod(){}

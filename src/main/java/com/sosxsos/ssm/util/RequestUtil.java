@@ -1,6 +1,5 @@
 package com.sosxsos.ssm.util;
 
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -8,6 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+
+import com.google.api.client.util.Maps;
 
 
 public class RequestUtil {
@@ -18,7 +19,7 @@ public class RequestUtil {
 		PageData pd = new PageData(request);
 		
 		Map properties = request.getParameterMap();
-		Map returnMap = new HashMap(); 
+		Map returnMap =	Maps.newHashMap();// new HashMap(); 
 		Iterator entries = properties.entrySet().iterator(); 
 		Map.Entry entry; 
 		String name = "";  

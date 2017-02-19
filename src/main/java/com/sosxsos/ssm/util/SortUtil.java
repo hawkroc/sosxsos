@@ -12,6 +12,8 @@ import org.apache.commons.collections.ComparatorUtils;
 import org.apache.commons.collections.comparators.ComparableComparator;
 import org.apache.commons.collections.comparators.ComparatorChain;
 
+import com.google.api.client.util.Maps;
+
 public class SortUtil {
 	public static void main(String[] args) {
 		System.out.println(testMapSort());
@@ -65,15 +67,15 @@ public class SortUtil {
 	public static List testMapSort(){
 		List sortList = new ArrayList();
 		
-		Map map = new HashMap();
+		Map map =Maps.newHashMap();// new HashMap();
 		map.put("name", "1");
 		map.put("age", "1");
 		
-		Map map2 = new HashMap();
+		Map map2 =Maps.newHashMap();
 		map2.put("name", "2");
 		map2.put("age", "13");
 		
-		Map map1 = new HashMap();
+		Map map1 = Maps.newHashMap();
 		map1.put("name", "2");
 		map1.put("age", "12");
 		

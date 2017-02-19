@@ -9,6 +9,8 @@ import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.google.api.client.util.Maps;
+
 public class 	CommonData extends HashMap implements Map{
 	
 	private static final long serialVersionUID = 1L;
@@ -19,7 +21,7 @@ public class 	CommonData extends HashMap implements Map{
 	public CommonData(HttpServletRequest request){
 		this.request = request;
 		Map properties = request.getParameterMap();
-		Map returnMap = new HashMap(); 
+		Map returnMap =Maps.newHashMap();// new HashMap(); 
 		Iterator entries = properties.entrySet().iterator(); 
 		Map.Entry entry; 
 		String name = "";  

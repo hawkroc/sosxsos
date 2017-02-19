@@ -12,7 +12,7 @@ import com.dyuproject.protostuff.runtime.RuntimeSchema;
 
 
 /**
- * 序列话工具
+ * 序列化工具
  */
 public class ProtoStuffSerializerUtil {
 

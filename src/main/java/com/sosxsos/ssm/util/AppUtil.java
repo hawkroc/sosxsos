@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 import com.fasterxml.jackson.databind.util.JSONPObject;
+import com.google.common.base.Preconditions;
 
 public class AppUtil  {
 	
@@ -44,7 +45,7 @@ public class AppUtil  {
 				falseCount += 1;
 			}
 		}
-		
+		//Preconditions.checkArgument(expression);
 		if(falseCount>0){
 			logger.error(method+"接口，请求协议中缺少 "+falseCount+"个 参数");
 			for(int j=1;j<=falseCount;j++){

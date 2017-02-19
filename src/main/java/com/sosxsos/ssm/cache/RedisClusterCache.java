@@ -1,4 +1,5 @@
 package com.sosxsos.ssm.cache;
+import com.google.api.client.util.Sets;
 import com.sosxsos.ssm.util.ProtoStuffSerializerUtil;
 import org.springframework.stereotype.Component;
 import redis.clients.jedis.Jedis;
@@ -103,7 +104,7 @@ public class RedisClusterCache {
 	 * @return
      */
 	public Set<String> keys(String pattern){
-		Set<String> keys = new HashSet<>();
+		Set<String> keys = Sets.newHashSet();// new HashSet<>();
 		Map<String, JedisPool> clusterNodes = jedisCluster.getClusterNodes();
 		for(String k : clusterNodes.keySet()){
 			JedisPool jp = clusterNodes.get(k);

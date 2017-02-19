@@ -5,7 +5,7 @@ import com.sosxsos.ssm.entity.LocationRangeEntity;
 //import com.fh.entity.LocationRangeEntity;
 
 
-public  class LatLonUtil {
+public final class LatLonUtil {
 
 	private static final double PI = 3.14159265; // 圆周率
 	private static final double EARTH_RADIUS = 6378137; // 地球半径

@@ -1,6 +1,6 @@
 package com.sosxsos.ssm.util;
 
-import com.sosxsos.ssm.entity.LocationRangeEntity;
+
 
 //import com.fh.entity.LocationRangeEntity;
 
@@ -54,38 +54,38 @@ public static LatLonUtil getInstance() {
 	 * 最大经度 maxLng 
 	 * 最大纬度 minLat
 	 */
-	public  LocationRangeEntity getAround(double lat, double lon, int raidus) {
-
-		Double latitude = lat;// 传值给经度
-		Double longitude = lon;// 传值给纬度
-
-		//Double degree = (24901 * 1609) / 360.0; // 获取每度
-		double raidusMile = raidus;
-
-		//Double dpmLat = 1 / degree;
-		Double radiusLat = dpmLat * raidusMile;
-		// 获取最小纬度
-		Double minLat = latitude - radiusLat;
-		// 获取最大纬度
-		Double maxLat = latitude + radiusLat;
-
-		Double mpdLng = degree * Math.cos(latitude * (PI / 180));
-		Double dpmLng = 1 / mpdLng;
-		Double radiusLng = dpmLng * raidusMile;
-		//获取最小经度
-		Double minLng = longitude - radiusLng;
-		// 获取最大经度
-		Double maxLng = longitude + radiusLng;
-		
-	
-
-		return new LocationRangeEntity(minLat, minLng, maxLat, maxLng);
-	}
-	
-	public  LocationRangeEntity getDefaultAround(double lat, double lon) {
-		return getAround(lat,lon,1000);
-		
-	}
+//	public  LocationRangeEntity getAround(double lat, double lon, int raidus) {
+//
+//		Double latitude = lat;// 传值给经度
+//		Double longitude = lon;// 传值给纬度
+//
+//		//Double degree = (24901 * 1609) / 360.0; // 获取每度
+//		double raidusMile = raidus;
+//
+//		//Double dpmLat = 1 / degree;
+//		Double radiusLat = dpmLat * raidusMile;
+//		// 获取最小纬度
+//		Double minLat = latitude - radiusLat;
+//		// 获取最大纬度
+//		Double maxLat = latitude + radiusLat;
+//
+//		Double mpdLng = degree * Math.cos(latitude * (PI / 180));
+//		Double dpmLng = 1 / mpdLng;
+//		Double radiusLng = dpmLng * raidusMile;
+//		//获取最小经度
+//		Double minLng = longitude - radiusLng;
+//		// 获取最大经度
+//		Double maxLng = longitude + radiusLng;
+//		
+//	
+//
+//		return new LocationRangeEntity(minLat, minLng, maxLat, maxLng);
+//	}
+//	
+//	public  LocationRangeEntity getDefaultAround(double lat, double lon) {
+//		return getAround(lat,lon,1000);
+//		
+//	}
 
 //public class LocationRangeEntity{
 //	public 	LocationRangeEntity(double minLat,double  minLng, double maxLat, double maxLng){

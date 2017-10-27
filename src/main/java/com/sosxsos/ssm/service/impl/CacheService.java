@@ -5,10 +5,6 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.sosxsos.ssm.cache.RedisCache;
-import com.sosxsos.ssm.entity.BananaEntity;
-import com.sosxsos.ssm.entity.BubbleEntity;
-import com.sosxsos.ssm.entity.TransactionsEntity;
-import com.sosxsos.ssm.entity.UserEntity;
 import com.sosxsos.ssm.util.CacheUtil;
 import com.sosxsos.ssm.util.Const;
 

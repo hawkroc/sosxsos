@@ -59,4 +59,17 @@ public class BizQuartz {
 		cache.clearCache();
 	}
 	
+	/**
+	 * 每隔1分钟定时清理缓存
+	 * （这里要注意集群环境 可能出现重复触发的情况 ）
+	 */
+	@Scheduled(cron = "0 0/1 * * * ? ")
+	public void getDataFromApi() {
+		LOG.info("@Scheduled-------cacheClear()");
+		System.out.println("tdsfsdfsdf");
+		cache.clearCache();
+	}
+	
+	
+	
 }

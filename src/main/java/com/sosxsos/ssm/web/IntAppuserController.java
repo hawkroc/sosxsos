@@ -8,7 +8,7 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.sosxsos.ssm.service.impl.AppuserService;
+
 import com.sosxsos.ssm.service.impl.CacheService;
 import com.sosxsos.ssm.service.impl.EmailService;
 import com.sosxsos.ssm.service.impl.SmsService;
@@ -24,9 +24,6 @@ import com.sosxsos.ssm.service.impl.SmsService;
 public class IntAppuserController extends BaseController {
 	@Autowired
 	private HttpServletRequest request;
-	@Resource(name = "appuserService")
-	private AppuserService appuserService;
-
 	@Resource(name = "cacheService")
 	private CacheService cacheService;
 
